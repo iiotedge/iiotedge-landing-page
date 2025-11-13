@@ -4,10 +4,11 @@ export default function Contact() {
   return (
     <section id="contact" className="mx-auto mt-20 max-w-6xl px-6" aria-labelledby="contact-heading">
       <h2 id="contact-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-        Contact
+        Let's Build the Edge Together
       </h2>
       <p className="mt-3 text-sm text-zinc-700 dark:text-zinc-300">
-        Email us at <a href="mailto:info@iiotedge.com" className="underline">info@iiotedge.com</a> or use the form below.
+        Share your initiative and our edge engineering pod will reach out within one business day. Email us at{" "}
+        <a href="mailto:info@iiotedge.com" className="underline">info@iiotedge.com</a> or use the form below.
       </p>
       <form className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
         <div className="sm:col-span-1">
@@ -24,7 +25,7 @@ export default function Contact() {
         </div>
         <div className="sm:col-span-2">
           <button type="submit" className="rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6]">
-            Send Message
+            Send Project Brief
           </button>
         </div>
       </form>

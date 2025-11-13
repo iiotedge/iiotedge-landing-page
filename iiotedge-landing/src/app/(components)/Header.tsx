@@ -8,11 +8,11 @@ export default function Header() {
           IIoTEdge
         </Link>
         <nav className="hidden gap-6 text-sm text-zinc-700 md:flex dark:text-zinc-300">
-          <Link href="#core-focus" className="hover:text-black dark:hover:text-white">Core Focus</Link>
-          <Link href="#ecosystem" className="hover:text-black dark:hover:text-white">Ecosystem</Link>
-          <Link href="#deliverables" className="hover:text-black dark:hover:text-white">What We Deliver</Link>
+          <Link href="#core-focus" className="hover:text-black dark:hover:text-white">Capabilities</Link>
+          <Link href="#ecosystem" className="hover:text-black dark:hover:text-white">Platform</Link>
+          <Link href="#deliverables" className="hover:text-black dark:hover:text-white">Deliverables</Link>
           <Link href="#industries" className="hover:text-black dark:hover:text-white">Industries</Link>
-          <Link href="#why-choose" className="hover:text-black dark:hover:text-white">Why Us</Link>
+          <Link href="#why-choose" className="hover:text-black dark:hover:text-white">Why IIoTEdge</Link>
           <Link href="#contact" className="hover:text-black dark:hover:text-white">Contact</Link>
         </nav>
         <Link

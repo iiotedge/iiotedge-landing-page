@@ -1,40 +1,44 @@
 export default function CoreFocus() {
   const items = [
     {
-      title: "Edge AI Processing",
+      title: "Unified Edge Orchestration",
       description:
-        "Analyze telemetry, detect anomalies, and make decisions in real time.",
-      icon: "⚙️",
+        "Push containers, rules, and firmware to thousands of sites with one automated pipeline.",
+      icon: "🧭",
     },
     {
-      title: "Offline Autonomy",
+      title: "Deterministic Telemetry Fabric",
       description:
-        "Continue operations even without internet connectivity.",
-      icon: "🔌",
+        "Buffer, compress, and stream sensor data with millisecond fidelity and built-in QoS.",
+      icon: "📡",
     },
     {
-      title: "Secure OTA Updates",
-      description: "Update firmware and software safely over the air.",
-      icon: "🔒",
+      title: "AI Lifecycle Automation",
+      description: "Version, monitor, and retrain edge-resident ML models from a single control plane.",
+      icon: "🤖",
     },
     {
-      title: "Multi-Protocol Support",
+      title: "Zero-Trust Security Mesh",
       description:
-        "CAN, RS-485, MQTT, Modbus, LoRa, Ethernet, and 4G/5G connectivity.",
-      icon: "🔗",
+        "Hardware attestation, policy-based routing, and encrypted comms across every device.",
+      icon: "🔐",
     },
     {
-      title: "Containerized Edge Apps",
-      description:
-        "Deploy your own analytics or control logic with container support.",
-      icon: "📦",
+      title: "Offline-First Resilience",
+      description: "Keep plants productive across lossy or air-gapped networks with local autonomy.",
+      icon: "⚡️",
+    },
+    {
+      title: "Operations Studio",
+      description: "Convert raw telemetry into dashboards, workflows, and closed-loop automations.",
+      icon: "📊",
     },
   ];
 
   return (
     <section id="core-focus" className="mx-auto mt-20 max-w-6xl px-6" aria-labelledby="core-focus-heading">
       <h2 id="core-focus-heading" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-        Our Core Focus — Edge Computing
+        Core Edge Capabilities
       </h2>
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (

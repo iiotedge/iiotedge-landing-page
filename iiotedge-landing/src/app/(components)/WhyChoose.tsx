@@ -1,10 +1,10 @@
 export default function WhyChoose() {
   const points = [
-    "Edge-First Architecture — Compute where it matters most",
-    "AI-Driven Insights — Smarter decisions with local analytics",
-    "Resilient & Secure — Built for harsh industrial environments",
-    "Open & Scalable — Compatible with existing infrastructure",
-    "End-to-End Expertise — From device to dashboard",
+    "Offline-first reliability - keep production running through outages",
+    "Continuous intelligence - instrument models, data, and actions in real time",
+    "Zero-trust security - hardware attestation, policy enforcement, and encryption by default",
+    "Protocol-agnostic integration - bridge brownfield PLCs with modern cloud-native workloads",
+    "Delivery pods - multidisciplinary teams from architecture to 24/7 operations",
   ];
   return (
     <section id="why-choose" className="mx-auto mt-20 max-w-6xl px-6" aria-labelledby="why-choose-heading">

@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <div className="text-lg font-semibold">IIoTEdge</div>
           <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-            Smarter industries begin at the edge.
+          Powering the future of edge intelligence.
           </p>
         </div>
         <nav className="grid grid-cols-2 gap-6 text-sm text-zinc-700 dark:text-zinc-300">

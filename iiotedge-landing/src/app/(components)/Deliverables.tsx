@@ -1,35 +1,35 @@
 export default function Deliverables() {
   const cards = [
     {
-      title: "Edge Hardware & Embedded Solutions",
+      title: "Rugged Edge Hardware & Field Kits",
       points: [
-        "STM32 & RISC-V industrial controllers",
-        "Modular comms (4G/5G, Ethernet, RS-485, LoRa)",
-        "Edge gateways with on-device analytics",
+        "Arm, x86, and RISC-V gateways with modular I/O & GPU options",
+        "Certified enclosures for plant, mining, and energy deployments",
+        "Reference kits with sensors, connectivity, and starter workloads",
       ],
     },
     {
-      title: "Edge Computing Platform",
+      title: "IIoTEdge Control Plane",
       points: [
-        "Local rule engine & event handling",
-        "Real-time stream processing & decisions",
-        "Secure OTA firmware management & diagnostics",
+        "Device identity, provisioning, and lifecycle automation",
+        "GitOps-style configuration management with safe rollbacks",
+        "Fleet-wide observability for workloads, health, and compliance",
       ],
     },
     {
-      title: "Edge AI & Automation",
+      title: "Edge AI & Advanced Analytics",
       points: [
-        "Predictive maintenance at the edge",
-        "On-device ML models",
-        "Containerized model deployment",
+        "Model packaging for TensorRT, ONNX, and custom runtimes",
+        "Closed-loop feedback on drift, confidence, and anomalies",
+        "Federated learning pipelines across distributed assets",
       ],
     },
     {
-      title: "Engineering & Outsourced Development",
+      title: "Delivery & Co-Development Pods",
       points: [
-        "Firmware & PCB design",
-        "IoT app development & cloud integration",
-        "Industrial-grade testing & deployment",
+        "Edge-first architecture, pilots, and rollout planning",
+        "Integrations with MES, SCADA, ERP, and cloud platforms",
+        "24/7 SRE support, shared runbooks, and governed SLAs",
       ],
     },
   ];
