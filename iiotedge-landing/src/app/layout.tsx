@@ -31,10 +31,10 @@ export const metadata: Metadata = {
       "Process, analyze, and act on industrial data at the edge with IIoTEdge.",
     images: [
       {
-        url: "/vercel.svg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "IIoTEdge — Edge Intelligence",
+        alt: "IIoTEdge — Edge Intelligence for Industrial IoT",
       },
     ],
   },
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "IIoTEdge | Edge Intelligence for Industrial IoT",
     description:
       "Rugged edge hardware + intelligent software for real-time industrial decisions.",
-    images: ["/vercel.svg"],
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -59,7 +59,7 @@ export default function RootLayout({
     url: "https://www.iiotedge.com/",
     email: "info@iiotedge.com",
     sameAs: [],
-    logo: "https://www.iiotedge.com/logo.png",
+    logo: "https://www.iiotedge.com/logo.svg",
     slogan: "Smarter industries begin at the edge.",
   };
 

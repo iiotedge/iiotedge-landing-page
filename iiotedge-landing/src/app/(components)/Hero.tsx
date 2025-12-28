@@ -5,62 +5,42 @@ import type { CSSProperties } from "react";
 
 const EDGE_SIGNAL_PRIMARY = [0.05, 0.12, 0.18, 0.38, 0.5, 0.72, 0.76, 0.82, 0.88, 0.94, 0.98];
 const EDGE_SIGNAL_SECONDARY = [0.02, 0.08, 0.16, 0.24, 0.28, 0.35, 0.42, 0.5, 0.52, 0.6, 0.64];
+// Social links - update with actual IIoTEdge social media accounts when available
 const SOCIAL_LINKS: SocialLink[] = [
   {
-    name: "Bluesky",
-    href: "https://bsky.app/profile/optimisticweb.com",
-    icon: "Bsky",
-    background: "#3a83f7",
-    monoBackground: "#111111",
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/iiotedge",
+    icon: "LI",
+    background: "#0077b5",
+    monoBackground: "#1f1f1f",
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/optimisticweb",
+    href: "https://twitter.com/iiotedge",
     icon: "X",
     background: "#101419",
     monoBackground: "#1f1f1f",
   },
   {
-    name: "YouTube",
-    href: "https://www.youtube.com/@optimisticweb",
-    icon: "YT",
-    background: "#ff0000",
+    name: "GitHub",
+    href: "https://github.com/iiotedge",
+    icon: "GH",
+    background: "#24292e",
     monoBackground: "#2a2a2a",
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/optimisticweb",
-    icon: "IG",
-    background: "linear-gradient(-45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5)",
-    monoBackground: "#373737",
-  },
-  {
-    name: "Behance",
-    href: "#",
-    icon: "Be",
-    background: "#2356f6",
-    monoBackground: "#444444",
-  },
-  {
-    name: "Dribbble",
-    href: "#",
-    icon: "Dr",
-    background: "#ea4c89",
-    monoBackground: "#515151",
   },
 ];
 
 export default function Hero() {
   return (
     <>
-      <section className="earnwave-hero" aria-labelledby="earnwave-hero-heading">
+      <section className="iiotedge-hero" aria-labelledby="iiotedge-hero-heading">
         <div className="hero-grid" aria-hidden="true" />
-        <div className="earnwave-hero__container">
-          <div className="earnwave-hero__content">
-            <h1 id="earnwave-hero-heading" className="earnwave-hero__title">
+        <div className="iiotedge-hero__container">
+          <div className="iiotedge-hero__content">
+            <h1 id="iiotedge-hero-heading" className="iiotedge-hero__title">
               IIoTEdge - Powering the Future of Edge Intelligence
           </h1>
-            <p className="earnwave-hero__subtitle">
+            <p className="iiotedge-hero__subtitle">
               Deploy, orchestrate, and optimize industrial AI at scale with rugged edge hardware, zero-trust connectivity, and real-time insight.
             </p>
             <Locks />
@@ -69,9 +49,9 @@ export default function Hero() {
         </div>
       </section>
 
-      <section className="earnwave-widgets" aria-label="IIoTEdge operational overview">
-        <div className="earnwave-widgets__decor" aria-hidden="true" />
-        <div className="earnwave-widgets__grid">
+      <section className="iiotedge-widgets" aria-label="IIoTEdge operational overview">
+        <div className="iiotedge-widgets__decor" aria-hidden="true" />
+        <div className="iiotedge-widgets__grid">
           <EdgeOperationsWidget />
           <ConnectorWidget />
           <InsightsWidget />
@@ -97,15 +77,15 @@ const LOCK_SHAPES: LockShape[] = [
 
 function Locks() {
   return (
-    <div className="earnwave-locks" aria-hidden="true">
+    <div className="iiotedge-locks" aria-hidden="true">
       {LOCK_SHAPES.map((shape, index) => {
         if (shape === "line") {
-          return <span key={`lock-line-${index}`} className="earnwave-locks__line" />;
+          return <span key={`lock-line-${index}`} className="iiotedge-locks__line" />;
         }
 
         if (shape === "lock") {
           return (
-            <span key="lock-center" className="earnwave-locks__center-dot">
+            <span key="lock-center" className="iiotedge-locks__center-dot">
               <LockIcon />
             </span>
           );
@@ -113,8 +93,8 @@ function Locks() {
 
         const className =
           shape === "dot-lg"
-            ? "earnwave-locks__dot earnwave-locks__dot--lg"
-            : "earnwave-locks__dot";
+            ? "iiotedge-locks__dot iiotedge-locks__dot--lg"
+            : "iiotedge-locks__dot";
 
         return <span key={`lock-${shape}-${index}`} className={className} />;
       })}
@@ -125,7 +105,7 @@ function Locks() {
 function LockIcon() {
   return (
     <svg
-      className="earnwave-locks__icon"
+      className="iiotedge-locks__icon"
       viewBox="0 0 24 24"
       role="img"
       aria-hidden="true"
@@ -170,9 +150,9 @@ function Widget({
   }, [entering]);
 
   const className = [
-    "earnwave-widget",
-    centered && "earnwave-widget--centered",
-    entering && "earnwave-widget--entering",
+    "iiotedge-widget",
+    centered && "iiotedge-widget--centered",
+    entering && "iiotedge-widget--entering",
   ]
     .filter(Boolean)
     .join(" ");
@@ -193,10 +173,10 @@ function EdgeOperationsWidget() {
 
   return (
     <Widget enteringDelay={300}>
-      <div className="earnwave-widget__badge">Edge Operations Pulse</div>
-      <div className="earnwave-widget__amount earnwave-widget__amount--lg">{gatewaysOnline} Nodes</div>
-      <div className="earnwave-widget__label">Field gateways online</div>
-      <div className="earnwave-widget__amount">{telemetryStreams} encrypted data streams</div>
+      <div className="iiotedge-widget__badge">Edge Operations Pulse</div>
+      <div className="iiotedge-widget__amount iiotedge-widget__amount--lg">{gatewaysOnline} Nodes</div>
+      <div className="iiotedge-widget__label">Field gateways online</div>
+      <div className="iiotedge-widget__amount">{telemetryStreams} encrypted data streams</div>
       <WidgetGraph ariaLabel="Edge throughput versus anomaly baseline" pointsA={EDGE_SIGNAL_PRIMARY} pointsB={EDGE_SIGNAL_SECONDARY} />
     </Widget>
   );
@@ -208,7 +188,7 @@ function ConnectorWidget() {
   return (
     <Widget centered enteringDelay={450}>
       <WidgetCirclesWithRays />
-      <h2 className="earnwave-widget__title">Integrate Any Industrial Protocol</h2>
+      <h2 className="iiotedge-widget__title">Integrate Any Industrial Protocol</h2>
       <Switch
         label="Auto-sync connectors"
         checked={autoSync}
@@ -229,14 +209,14 @@ function InsightsWidget() {
 
   return (
     <Widget enteringDelay={600}>
-      <div className="earnwave-widget__graphic-wrap">
-        <div className="earnwave-widget__fake-icon">
+      <div className="iiotedge-widget__graphic-wrap">
+        <div className="iiotedge-widget__fake-icon">
           <Icon icon="fake-refresh" />
         </div>
         <WidgetCircles />
         <QuestionTags questions={questions} />
       </div>
-      <div className="earnwave-widget__actions">
+      <div className="iiotedge-widget__actions">
         <p>Surface insights and trigger playbooks in a single command center.</p>
         <IconButton title="View playbooks" icon="caret-right" />
       </div>
@@ -246,10 +226,10 @@ function InsightsWidget() {
 
 function Switch({ label, checked, onChange }: SwitchProps) {
   return (
-    <label className="earnwave-switch">
-      <span className="earnwave-switch__sr-text">{label}</span>
+    <label className="iiotedge-switch">
+      <span className="iiotedge-switch__sr-text">{label}</span>
       <input
-        className="earnwave-switch__input"
+        className="iiotedge-switch__input"
         role="switch"
         type="checkbox"
         checked={checked}
@@ -262,7 +242,7 @@ function Switch({ label, checked, onChange }: SwitchProps) {
 
 function PrimaryActionButton({ href, children }: PrimaryActionButtonProps) {
   return (
-    <a href={href} className="earnwave-btn earnwave-btn--primary">
+    <a href={href} className="iiotedge-btn iiotedge-btn--primary">
       {children}
     </a>
   );
@@ -270,7 +250,7 @@ function PrimaryActionButton({ href, children }: PrimaryActionButtonProps) {
 
 function IconButton({ title, icon }: IconButtonProps) {
   return (
-    <button className="earnwave-btn earnwave-btn--square" type="button" title={title} aria-label={title}>
+    <button className="iiotedge-btn iiotedge-btn--square" type="button" title={title} aria-label={title}>
       <Icon icon={icon} />
     </button>
   );
@@ -279,22 +259,22 @@ function IconButton({ title, icon }: IconButtonProps) {
 function WidgetCircles() {
   return (
     <>
-      <div className="earnwave-widget__circle earnwave-widget__circle--ts1" />
-      <div className="earnwave-widget__circle earnwave-widget__circle--ts2" />
-      <div className="earnwave-widget__circle earnwave-widget__circle--ts3" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--ts1" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--ts2" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--ts3" />
     </>
   );
 }
 
 function WidgetCirclesWithRays() {
   return (
-    <div className="earnwave-widget__circle-wrap">
+    <div className="iiotedge-widget__circle-wrap">
       {Array.from({ length: 8 }).map((_, index) => (
-        <div key={`ray-${index}`} className="earnwave-widget__ray" />
+        <div key={`ray-${index}`} className="iiotedge-widget__ray" />
       ))}
-      <div className="earnwave-widget__circle earnwave-widget__circle--bc1" />
-      <div className="earnwave-widget__circle earnwave-widget__circle--bc2" />
-      <div className="earnwave-widget__circle earnwave-widget__circle--bc3" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--bc1" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--bc2" />
+      <div className="iiotedge-widget__circle iiotedge-widget__circle--bc3" />
     </div>
   );
 }
@@ -309,11 +289,11 @@ function ProtocolBadges() {
   ];
 
   return (
-    <div className="earnwave-source-icons">
+    <div className="iiotedge-source-icons">
       {protocols.map((protocol) => (
         <div
           key={protocol.name}
-          className={`earnwave-source-icon earnwave-source-icon--${protocol.emphasis}`}
+          className={`iiotedge-source-icon iiotedge-source-icon--${protocol.emphasis}`}
           role="img"
           aria-label={protocol.name}
         >
@@ -328,7 +308,7 @@ function Icon({ icon }: IconProps) {
   return (
     <>
       <IconSprites />
-      <svg className="earnwave-icon" aria-hidden="true">
+      <svg className="iiotedge-icon" aria-hidden="true">
         <use href={`#${icon}`} />
       </svg>
     </>
@@ -337,7 +317,7 @@ function Icon({ icon }: IconProps) {
 
 function IconSprites() {
   return (
-    <svg className="earnwave-sr-only" aria-hidden="true" focusable="false">
+    <svg className="iiotedge-sr-only" aria-hidden="true" focusable="false">
       <symbol id="amazon" viewBox="0 0 16 16">
         <circle fill="hsl(36, 100%, 50%)" cx="8" cy="8" r="8" />
         <g fill="none" fillRule="evenodd" transform="matrix(0.625, 0, 0, 0.625, 3, 3)">
@@ -462,7 +442,7 @@ function WidgetGraph({ ariaLabel, pointsA, pointsB }: WidgetGraphProps) {
     <svg
       role="img"
       aria-label={ariaLabel}
-      className="earnwave-widget__graph"
+      className="iiotedge-widget__graph"
       viewBox={`0 0 ${graphWidth} ${graphHeight}`}
       width={graphWidth}
       height={graphHeight}
@@ -515,13 +495,13 @@ function QuestionTags({ questions }: QuestionTagsProps) {
     <svg
       role="img"
       aria-label={questions.join(" ")}
-      className="earnwave-question-tags"
+      className="iiotedge-question-tags"
       viewBox="0 0 170 140"
     >
       {questionData.map((question, index) => (
         <g
           key={QUESTION_TAG_CONFIG[index]?.id ?? index}
-          className="earnwave-question-tags__tag"
+          className="iiotedge-question-tags__tag"
           transform={`translate(${27 + index * 22}, ${85 - index * 35})`}
         >
           <path
