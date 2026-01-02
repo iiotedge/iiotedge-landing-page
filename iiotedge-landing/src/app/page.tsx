@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Hero from "./(components)/Hero";
+import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
 import Deliverables from "./(components)/Deliverables";
@@ -24,6 +25,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Overview />
       <CoreFocus />
       <Ecosystem />
       <Deliverables />
