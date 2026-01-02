@@ -1,7 +1,7 @@
  "use client";
 
 import { useEffect } from "react";
-import Hero from "./(components)/Hero";
+import HeroSection from "./(components)/Hero";
 import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      <HeroSection />
       <Overview />
       <CoreFocus />
       <Ecosystem />
