@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import HeroSection from "./(components)/Hero";
+import SocialProofStrip from "./(components)/SocialProofStrip";
 import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
@@ -25,6 +26,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <SocialProofStrip />
       <Overview />
       <CoreFocus />
       <Ecosystem />
