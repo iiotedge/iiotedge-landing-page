@@ -5,6 +5,7 @@ import HeroSection from "./(components)/Hero";
 import SocialProofStrip from "./(components)/SocialProofStrip";
 import ProblemSolutionSection from "./(components)/ProblemSolutionSection";
 import CompleteStackSection from "./(components)/CompleteStackSection";
+import FiveGShowcaseSection from "./(components)/FiveGShowcaseSection";
 import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
@@ -31,6 +32,7 @@ export default function Home() {
       <SocialProofStrip />
       <ProblemSolutionSection />
       <CompleteStackSection />
+      <FiveGShowcaseSection />
       <Overview />
       <CoreFocus />
       <Ecosystem />
