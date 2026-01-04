@@ -148,13 +148,24 @@ const PlatformDemoSection = () => {
   );
 
   const LiveChart = ({ isPlaying }: LiveChartProps) => {
+    // Initialize with deterministic values to avoid hydration mismatch
     const [data, setData] = useState<ChartDataPoint[]>(Array(20).fill(0).map((_, i) => ({
       time: i,
-      value: 50 + Math.random() * 30
+      value: 50 + (i % 10) * 3 // Deterministic initial values
     })));
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Initialize with random values only on client side
+    useEffect(() => {
+      setIsMounted(true);
+      setData(Array(20).fill(0).map((_, i) => ({
+        time: i,
+        value: 50 + Math.random() * 30
+      })));
+    }, []);
 
     useEffect(() => {
-      if (!isPlaying) return;
+      if (!isPlaying || !isMounted) return;
 
       const interval = setInterval(() => {
         setData(prev => {
@@ -167,7 +178,7 @@ const PlatformDemoSection = () => {
       }, 1000);
 
       return () => clearInterval(interval);
-    }, [isPlaying]);
+    }, [isPlaying, isMounted]);
 
     return (
       <div className="h-48 flex items-end space-x-1">
