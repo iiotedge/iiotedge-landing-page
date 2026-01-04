@@ -7,6 +7,7 @@ import ProblemSolutionSection from "./(components)/ProblemSolutionSection";
 import CompleteStackSection from "./(components)/CompleteStackSection";
 import FiveGShowcaseSection from "./(components)/FiveGShowcaseSection";
 import PlatformDemoSection from "./(components)/PlatformDemoSection";
+import IndustriesSection from "./(components)/IndustriesSection";
 import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
@@ -35,6 +36,7 @@ export default function Home() {
       <CompleteStackSection />
       <FiveGShowcaseSection />
       <PlatformDemoSection />
+      <IndustriesSection />
       <Overview />
       <CoreFocus />
       <Ecosystem />
