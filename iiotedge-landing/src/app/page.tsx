@@ -6,6 +6,7 @@ import SocialProofStrip from "./(components)/SocialProofStrip";
 import ProblemSolutionSection from "./(components)/ProblemSolutionSection";
 import CompleteStackSection from "./(components)/CompleteStackSection";
 import FiveGShowcaseSection from "./(components)/FiveGShowcaseSection";
+import PlatformDemoSection from "./(components)/PlatformDemoSection";
 import Overview from "./(components)/Overview";
 import CoreFocus from "./(components)/CoreFocus";
 import Ecosystem from "./(components)/Ecosystem";
@@ -33,6 +34,7 @@ export default function Home() {
       <ProblemSolutionSection />
       <CompleteStackSection />
       <FiveGShowcaseSection />
+      <PlatformDemoSection />
       <Overview />
       <CoreFocus />
       <Ecosystem />
