@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Header() {
@@ -20,10 +21,17 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link 
           href="/" 
-          className="text-lg font-semibold tracking-tight transition-opacity hover:opacity-80"
+          className="flex items-center space-x-3 text-lg font-semibold tracking-tight transition-opacity hover:opacity-80"
           aria-label="IIoTEdge Home"
         >
-          IIoTEdge
+          <Image
+            src="/IoT Mining Logo Icon.png"
+            alt="IoT Mining Logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain"
+          />
+          <span>IIoTEdge</span>
         </Link>
         
         {/* Desktop Navigation */}
