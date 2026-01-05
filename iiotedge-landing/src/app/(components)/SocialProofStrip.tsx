@@ -196,10 +196,12 @@ const SocialProofStrip = () => {
 
         .animate-scroll {
           animation: scroll 30s linear infinite;
+          will-change: transform;
         }
 
         .animate-scroll-reverse {
           animation: scroll-reverse 35s linear infinite;
+          will-change: transform;
         }
 
         .animate-scroll:hover,
@@ -211,6 +213,13 @@ const SocialProofStrip = () => {
         .scroll-content {
           display: flex;
           flex-shrink: 0;
+        }
+
+        /* Smooth scrolling performance */
+        .animate-scroll,
+        .animate-scroll-reverse {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
       `}</style>
     </div>

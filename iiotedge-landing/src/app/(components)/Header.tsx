@@ -21,7 +21,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link 
           href="/" 
-          className="flex items-center space-x-3 text-lg font-semibold tracking-tight transition-opacity hover:opacity-80"
+          className="flex items-center space-x-3 text-lg font-semibold tracking-tight transition-opacity duration-300 ease-out hover:opacity-80"
           aria-label="IIoTEdge Home"
         >
           <Image
@@ -40,7 +40,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-black dark:hover:text-white"
+              className="transition-colors duration-300 ease-out hover:text-black dark:hover:text-white"
             >
               {link.label}
             </Link>
@@ -50,7 +50,7 @@ export default function Header() {
         {/* Desktop CTA */}
         <Link
           href="#contact"
-          className="hidden rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6] md:inline-block"
+          className="hidden rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6] md:inline-block"
           data-event="cta_click"
           data-payload='{"location":"header"}'
         >
@@ -111,7 +111,7 @@ export default function Header() {
               ))}
               <Link
                 href="#contact"
-                className="mt-2 rounded-full bg-black px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6]"
+                className="mt-2 rounded-full bg-black px-4 py-2 text-center text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6]"
                 onClick={() => setMobileMenuOpen(false)}
                 data-event="cta_click"
                 data-payload='{"location":"header_mobile"}'

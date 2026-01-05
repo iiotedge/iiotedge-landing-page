@@ -114,7 +114,7 @@ const PlatformDemoSection = () => {
         </div>
         <button 
           onClick={() => setIsPlaying(!isPlaying)}
-          className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+          className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors duration-300 ease-out"
         >
           {isPlaying ? <Pause className="w-4 h-4 text-slate-400" /> : <Play className="w-4 h-4 text-slate-400" />}
         </button>
@@ -185,7 +185,7 @@ const PlatformDemoSection = () => {
         {data.map((point, i) => (
           <div
             key={i}
-            className="flex-1 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t transition-all duration-300"
+            className="flex-1 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-t transition-all duration-300 ease-out"
             style={{ height: `${point.value}%` }}
           />
         ))}
@@ -196,7 +196,7 @@ const PlatformDemoSection = () => {
   const DeviceCard = ({ device, isSelected, onClick }: DeviceCardProps) => (
     <div 
       onClick={onClick}
-      className={`bg-slate-900/50 border rounded-xl p-4 cursor-pointer transition-all ${
+      className={`bg-slate-900/50 border rounded-xl p-4 cursor-pointer transition-all duration-300 ease-out ${
         isSelected ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-slate-800 hover:border-slate-700'
       }`}
     >
@@ -396,7 +396,7 @@ const PlatformDemoSection = () => {
                         item.color === 'red' ? 'bg-red-500' :
                         item.color === 'yellow' ? 'bg-yellow-500' :
                         'bg-green-500'
-                      } transition-all duration-1000`}
+                      } transition-all duration-1000 ease-out`}
                       style={{ width: `${item.risk}%` }}
                     />
                   </div>
@@ -555,7 +555,7 @@ const PlatformDemoSection = () => {
                     <span className="text-xs text-slate-400">{device.status}</span>
                   </div>
                 </div>
-                <button className="p-2 bg-blue-500/10 hover:bg-blue-500/20 rounded-lg transition-colors">
+                <button className="p-2 bg-blue-500/10 hover:bg-blue-500/20 rounded-lg transition-colors duration-300 ease-out">
                   <Settings className="w-5 h-5 text-blue-400" />
                 </button>
               </div>
@@ -576,13 +576,13 @@ const PlatformDemoSection = () => {
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-slate-700">
-                  <button className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-sm font-semibold transition-colors">
+                  <button className="px-4 py-2 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 rounded-lg text-green-400 text-sm font-semibold transition-colors duration-300 ease-out">
                     Start
                   </button>
-                  <button className="px-4 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm font-semibold transition-colors">
+                  <button className="px-4 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-400 text-sm font-semibold transition-colors duration-300 ease-out">
                     Pause
                   </button>
-                  <button className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-sm font-semibold transition-colors">
+                  <button className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-sm font-semibold transition-colors duration-300 ease-out">
                     Stop
                   </button>
                 </div>
@@ -637,7 +637,7 @@ const PlatformDemoSection = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`group flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                className={`group flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ease-out ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
                     : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-slate-300'
@@ -682,10 +682,10 @@ const PlatformDemoSection = () => {
           <p className="text-slate-400 mb-6">
             Experience the full platform with a personalized demo
           </p>
-          <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
+          <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
             <span className="flex items-center justify-center space-x-2">
               <span>Request Live Demo</span>
-              <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
             </span>
           </button>
         </div>

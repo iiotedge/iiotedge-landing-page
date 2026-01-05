@@ -128,7 +128,7 @@ const ProblemSolutionSection = () => {
 
   const ProblemCard = ({ icon: Icon, title, description, color, delay, activeView, isVisible }: ProblemCardProps) => (
     <div 
-      className={`group p-6 rounded-xl border transition-all duration-500 ${
+      className={`group p-6 rounded-xl border transition-all duration-500 ease-out ${
         activeView === 'problem' 
           ? 'bg-red-500/5 border-red-500/30 opacity-100' 
           : 'bg-slate-800/20 border-slate-700/20 opacity-30'
@@ -142,10 +142,10 @@ const ProblemSolutionSection = () => {
           activeView === 'problem' 
             ? 'bg-red-500/10 ring-2 ring-red-500/20' 
             : 'bg-slate-700/50'
-        } transition-all duration-300`}>
+        } transition-all duration-300 ease-out`}>
           <Icon className={`w-6 h-6 ${
             activeView === 'problem' ? 'text-red-400' : 'text-slate-500'
-          } transition-colors`} />
+          } transition-colors duration-300 ease-out`} />
         </div>
         <div className="flex-1">
           <h3 className={`text-lg font-semibold mb-2 ${
@@ -165,7 +165,7 @@ const ProblemSolutionSection = () => {
 
   const SolutionCard = ({ icon: Icon, title, description, color, delay, activeView, isVisible }: SolutionCardProps) => (
     <div 
-      className={`group p-6 rounded-xl border transition-all duration-500 ${
+      className={`group p-6 rounded-xl border transition-all duration-500 ease-out ${
         activeView === 'solution' 
           ? 'bg-blue-500/5 border-blue-500/30 opacity-100' 
           : 'bg-slate-800/20 border-slate-700/20 opacity-30'
@@ -179,10 +179,10 @@ const ProblemSolutionSection = () => {
           activeView === 'solution' 
             ? 'bg-blue-500/10 ring-2 ring-blue-500/20' 
             : 'bg-slate-700/50'
-        } transition-all duration-300`}>
+        } transition-all duration-300 ease-out`}>
           <Icon className={`w-6 h-6 ${
             activeView === 'solution' ? 'text-blue-400' : 'text-slate-500'
-          } transition-colors`} />
+          } transition-colors duration-300 ease-out`} />
         </div>
         <div className="flex-1">
           <h3 className={`text-lg font-semibold mb-2 ${
@@ -261,7 +261,7 @@ const ProblemSolutionSection = () => {
         {nodes.map((node, i) => (
           <div
             key={i}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500"
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out"
             style={{
               left: `${node.x}%`,
               top: `${node.y}%`,
@@ -416,7 +416,7 @@ const ProblemSolutionSection = () => {
           <div className="flex items-center justify-center space-x-4 mb-8">
             <button
               onClick={() => setActiveView('problem')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
                 activeView === 'problem'
                   ? 'bg-red-500/20 text-red-300 border-2 border-red-500/50'
                   : 'bg-slate-800/30 text-slate-500 border-2 border-slate-700/30 hover:border-slate-600/50'
@@ -431,7 +431,7 @@ const ProblemSolutionSection = () => {
             
             <button
               onClick={() => setActiveView('solution')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
                 activeView === 'solution'
                   ? 'bg-blue-500/20 text-blue-300 border-2 border-blue-500/50'
                   : 'bg-slate-800/30 text-slate-500 border-2 border-slate-700/30 hover:border-slate-600/50'
@@ -460,10 +460,10 @@ const ProblemSolutionSection = () => {
             5G connectivity, and enterprise-grade security—all in one platform.
           </p>
 
-          <button className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+          <button className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
             <span className="flex items-center space-x-2">
               <span>Explore Our Solution</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
             </span>
           </button>
         </div>

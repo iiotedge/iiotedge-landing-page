@@ -190,14 +190,14 @@ const CompleteStackSection = () => {
     return (
       <div
         onClick={() => onTabChange(index)}
-        className={`group relative cursor-pointer transition-all duration-500 ${
+        className={`group relative cursor-pointer transition-all duration-500 ease-out ${
           isActive ? 'scale-105' : 'hover:scale-102'
         }`}
         style={{
           animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none'
         }}
       >
-        <div className={`relative p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ${
+        <div className={`relative p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ease-out ${
           isActive 
             ? `bg-gradient-to-br ${colors.bg} ${colors.activeBorder} shadow-xl ${colors.glow}` 
             : `bg-slate-900/30 ${colors.border} hover:${colors.activeBorder}`
@@ -269,7 +269,7 @@ const CompleteStackSection = () => {
                 <div className={`mt-1 p-1 rounded-full ${colors.bg}`}>
                   <CheckCircle className={`w-4 h-4 ${colors.text}`} />
                 </div>
-                <span className="text-slate-300 group-hover:text-white transition-colors">
+                <span className="text-slate-300 group-hover:text-white transition-colors duration-300 ease-out">
                   {feature}
                 </span>
               </div>
@@ -295,9 +295,9 @@ const CompleteStackSection = () => {
           </div>
 
           {/* CTA */}
-          <button className={`group flex items-center space-x-2 px-6 py-3 ${colors.bg} border ${colors.border} rounded-lg font-semibold ${colors.text} hover:bg-opacity-80 transition-all`}>
+          <button className={`group flex items-center space-x-2 px-6 py-3 ${colors.bg} border ${colors.border} rounded-lg font-semibold ${colors.text} hover:bg-opacity-80 transition-all duration-300 ease-out`}>
             <span>Learn More</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
           </button>
         </div>
 
@@ -631,10 +631,10 @@ const CompleteStackSection = () => {
           <p className="text-slate-400 mb-6">
             Ready to transform your industrial operations with our complete stack?
           </p>
-          <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
+          <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
             <span className="flex items-center space-x-2">
               <span>Schedule a Demo</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
             </span>
           </button>
         </div>

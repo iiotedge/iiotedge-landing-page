@@ -57,16 +57,35 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Track mouse for parallax
+  // Track mouse for parallax with smooth easing
   useEffect(() => {
+    let rafId: number;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
+      targetX = (e.clientX / window.innerWidth - 0.5) * 20;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 20;
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    const animate = () => {
+      // Smooth interpolation with easing
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+      
+      setMousePos({ x: currentX, y: currentY });
+      rafId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    rafId = requestAnimationFrame(animate);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Draw connections
@@ -122,7 +141,7 @@ const HeroSection = () => {
 
   const MetricCard = ({ icon: Icon, value, label, delay }: MetricCardProps) => (
     <div 
-      className="bg-slate-900/40 backdrop-blur-md border border-blue-500/20 rounded-lg p-4 hover:border-blue-500/40 transition-all duration-300 hover:transform hover:scale-105"
+      className="bg-slate-900/40 backdrop-blur-md border border-blue-500/20 rounded-lg p-4 hover:border-blue-500/40 transition-all duration-300 ease-out hover:transform hover:scale-105"
       style={{ 
         animation: `fadeInUp 0.8s ease-out ${delay}s both`,
       }}
@@ -183,7 +202,8 @@ const HeroSection = () => {
                            linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
           transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-          transition: 'transform 0.3s ease-out',
+          transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+          willChange: 'transform',
         }}
       />
 
@@ -200,7 +220,11 @@ const HeroSection = () => {
           {/* Left: Text Content */}
           <div 
             className="space-y-8"
-            style={{ transform: `translate(${-mousePos.x * 0.5}px, ${-mousePos.y * 0.5}px)` }}
+            style={{ 
+              transform: `translate(${-mousePos.x * 0.5}px, ${-mousePos.y * 0.5}px)`,
+              transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'transform'
+            }}
           >
             {/* Badge */}
             <div 
@@ -236,15 +260,15 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.8s both' }}
             >
-              <button className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+              <button className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
                 <span className="relative z-10 flex items-center justify-center space-x-2">
                   <span>Get Free IoT Assessment</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
     </button>
 
-              <button className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all hover:scale-105">
+              <button className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105">
                 <span className="flex items-center justify-center space-x-2">
                   <Play className="w-5 h-5 fill-current" />
                   <span>Watch 2-Min Demo</span>
@@ -276,7 +300,11 @@ const HeroSection = () => {
           {/* Right: Floating Metrics */}
           <div 
             className="relative h-96 lg:h-[500px]"
-            style={{ transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)` }}
+            style={{ 
+              transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)`,
+              transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'transform'
+            }}
           >
             {/* Demo Image - Behind floating elements */}
             <div 
@@ -388,6 +416,12 @@ const HeroSection = () => {
           50% {
             transform: translateX(-50%) translateY(-10px);
           }
+        }
+
+        /* Smooth animation performance */
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
       `}</style>
     </div>

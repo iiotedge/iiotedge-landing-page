@@ -263,14 +263,14 @@ const IndustriesSection = () => {
     return (
       <div
         onMouseEnter={() => onHover(index)}
-        className={`group relative cursor-pointer transition-all duration-500 ${
+        className={`group relative cursor-pointer transition-all duration-500 ease-out ${
           isActive ? 'scale-105' : ''
         }`}
         style={{
           animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none'
         }}
       >
-        <div className={`relative h-full p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ${
+        <div className={`relative h-full p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ease-out ${
           isActive 
             ? `bg-gradient-to-br ${colors.bg} ${colors.activeBorder} shadow-xl ${colors.glow}` 
             : `bg-slate-900/30 ${colors.border} hover:${colors.activeBorder}`
@@ -278,7 +278,7 @@ const IndustriesSection = () => {
           {/* Icon */}
           <div className={`inline-flex p-4 rounded-xl mb-4 ${colors.iconBg} ${
             isActive ? 'ring-2 ' + colors.activeBorder : ''
-          } transition-all`}>
+          } transition-all duration-300 ease-out`}>
             <Icon className={`w-8 h-8 ${colors.text}`} />
           </div>
 
@@ -288,14 +288,14 @@ const IndustriesSection = () => {
             {industry.tagline}
           </p>
 
-          <p className={`text-sm leading-relaxed transition-colors ${
+          <p className={`text-sm leading-relaxed transition-colors duration-300 ease-out ${
             isActive ? 'text-slate-300' : 'text-slate-600'
           }`}>
             {industry.description}
           </p>
 
           {/* Arrow indicator */}
-          <div className={`absolute bottom-6 right-6 transition-all ${
+          <div className={`absolute bottom-6 right-6 transition-all duration-300 ease-out ${
             isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
           }`}>
             <ArrowRight className={`w-5 h-5 ${colors.text}`} />
@@ -360,9 +360,9 @@ const IndustriesSection = () => {
           </div>
 
           {/* CTA */}
-          <button className={`group flex items-center space-x-2 px-6 py-3 ${colors.bg} border ${colors.border} rounded-lg font-semibold ${colors.text} hover:bg-opacity-80 transition-all`}>
+          <button className={`group flex items-center space-x-2 px-6 py-3 ${colors.bg} border ${colors.border} rounded-lg font-semibold ${colors.text} hover:bg-opacity-80 transition-all duration-300 ease-out`}>
             <span>View Case Study</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
           </button>
         </div>
 
@@ -509,13 +509,13 @@ const IndustriesSection = () => {
             Let's discuss how IIoTEdge can transform your operations.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
+            <button className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
               <span className="flex items-center justify-center space-x-2">
                 <span>Schedule Consultation</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
               </span>
             </button>
-            <button className="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-lg font-semibold transition-all hover:scale-105">
+            <button className="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105">
               View All Case Studies
             </button>
           </div>

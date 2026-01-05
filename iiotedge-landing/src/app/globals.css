@@ -903,3 +903,27 @@ body {
     transition: none;
   }
 }
+
+/* Global animation optimizations for smooth performance */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* GPU acceleration for animated elements */
+.animate-float,
+.animate-pulse,
+.animate-scroll,
+.animate-scroll-reverse,
+[style*="animation"] {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

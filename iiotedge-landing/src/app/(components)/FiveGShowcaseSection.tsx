@@ -207,7 +207,7 @@ const FiveGShowcaseSection = () => {
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className={`rounded-lg border-2 transition-all duration-500 ${
+              className={`rounded-lg border-2 transition-all duration-500 ease-out ${
                 activeZones.includes(i)
                   ? 'bg-purple-500/20 border-purple-500/50 shadow-lg shadow-purple-500/30'
                   : 'bg-purple-500/5 border-purple-500/10'
@@ -286,7 +286,7 @@ const FiveGShowcaseSection = () => {
             </div>
             <div className="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div
-                className={`h-full ${colors.bg} transition-all duration-1000`}
+                className={`h-full ${colors.bg} transition-all duration-1000 ease-out`}
                 style={{ width: `${100 - current.latency}%` }}
               />
             </div>
@@ -302,7 +302,7 @@ const FiveGShowcaseSection = () => {
             </div>
             <div className="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div
-                className={`h-full ${colors.bg} transition-all duration-1000`}
+                className={`h-full ${colors.bg} transition-all duration-1000 ease-out`}
                 style={{ width: `${(current.bandwidth / 1000) * 100}%` }}
               />
             </div>
@@ -318,7 +318,7 @@ const FiveGShowcaseSection = () => {
             </div>
             <div className="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div
-                className={`h-full ${colors.bg} transition-all duration-1000`}
+                className={`h-full ${colors.bg} transition-all duration-1000 ease-out`}
                 style={{ width: `${current.reliability}%` }}
               />
             </div>
@@ -334,7 +334,7 @@ const FiveGShowcaseSection = () => {
             </div>
             <div className="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div
-                className={`h-full ${colors.bg} transition-all duration-1000`}
+                className={`h-full ${colors.bg} transition-all duration-1000 ease-out`}
                 style={{ width: `${(current.devices / 1000000) * 100}%` }}
               />
             </div>
@@ -372,7 +372,7 @@ const FiveGShowcaseSection = () => {
     return (
       <div
         onClick={() => onSelect(index)}
-        className={`group cursor-pointer p-6 rounded-xl border-2 transition-all duration-300 ${
+        className={`group cursor-pointer p-6 rounded-xl border-2 transition-all duration-300 ease-out ${
           isActive
             ? 'bg-purple-500/10 border-purple-500 shadow-lg shadow-purple-500/20'
             : 'bg-slate-900/30 border-slate-700 hover:border-purple-500/50'
@@ -416,13 +416,13 @@ const FiveGShowcaseSection = () => {
     const Icon = feature.icon;
     return (
       <div
-        className="group bg-slate-900/30 border border-slate-700 rounded-xl p-8 hover:border-purple-500/50 transition-all duration-300"
+        className="group bg-slate-900/30 border border-slate-700 rounded-xl p-8 hover:border-purple-500/50 transition-all duration-300 ease-out"
         style={{
           animation: isVisible ? `fadeInUp 0.6s ease-out ${0.4 + index * 0.1}s both` : 'none'
         }}
       >
         <div className="flex items-start space-x-4 mb-6">
-          <div className="p-3 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors">
+          <div className="p-3 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors duration-300 ease-out">
             <Icon className="w-8 h-8 text-purple-400" />
           </div>
           <div>
@@ -565,13 +565,13 @@ const FiveGShowcaseSection = () => {
             and deliver a turnkey 5G solution in weeks, not months.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="group px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50">
+            <button className="group px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50">
               <span className="flex items-center justify-center space-x-2">
                 <span>Download 5G Whitepaper</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
               </span>
             </button>
-            <button className="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-purple-500/30 text-white rounded-lg font-semibold transition-all hover:scale-105">
+            <button className="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-purple-500/30 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105">
               Schedule 5G Assessment
             </button>
           </div>
