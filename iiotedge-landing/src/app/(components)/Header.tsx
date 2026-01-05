@@ -16,25 +16,23 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link 
           href="/" 
-          className="text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-80"
+          className="text-lg font-semibold tracking-tight transition-opacity hover:opacity-80"
           aria-label="IIoTEdge Home"
         >
-          <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            IIoTEdge
-          </span>
+          IIoTEdge
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden gap-8 text-sm text-slate-300 md:flex" aria-label="Main navigation">
+        <nav className="hidden gap-6 text-sm text-zinc-700 md:flex dark:text-zinc-300" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-blue-400"
+              className="transition-colors hover:text-black dark:hover:text-white"
             >
               {link.label}
             </Link>
@@ -44,7 +42,7 @@ export default function Header() {
         {/* Desktop CTA */}
         <Link
           href="#contact"
-          className="hidden rounded-lg bg-blue-600 px-6 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 md:inline-block"
+          className="hidden rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6] md:inline-block"
           data-event="cta_click"
           data-payload='{"location":"header"}'
         >
@@ -54,7 +52,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="md:hidden text-slate-300 hover:text-blue-400 transition-colors"
+          className="md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
@@ -88,16 +86,16 @@ export default function Header() {
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <nav
-          className="border-t border-slate-800/50 bg-slate-950/95 backdrop-blur-md md:hidden"
+          className="border-t border-black/10 bg-white dark:border-white/10 dark:bg-black md:hidden"
           aria-label="Mobile navigation"
         >
-          <div className="mx-auto max-w-7xl px-6 py-4">
+          <div className="mx-auto max-w-6xl px-6 py-4">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-slate-300 transition-colors hover:text-blue-400"
+                  className="text-sm text-zinc-700 transition-colors hover:text-black dark:text-zinc-300 dark:hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -105,7 +103,7 @@ export default function Header() {
               ))}
               <Link
                 href="#contact"
-                className="mt-2 rounded-lg bg-blue-600 px-4 py-2 text-center text-sm font-semibold text-white transition-all hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
+                className="mt-2 rounded-full bg-black px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6]"
                 onClick={() => setMobileMenuOpen(false)}
                 data-event="cta_click"
                 data-payload='{"location":"header_mobile"}'
