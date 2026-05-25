@@ -1,49 +1,22 @@
-"use client";
-
-import { useEffect } from "react";
 import HeroSection from "./(components)/Hero";
 import SocialProofStrip from "./(components)/SocialProofStrip";
 import ProblemSolutionSection from "./(components)/ProblemSolutionSection";
 import CompleteStackSection from "./(components)/CompleteStackSection";
-import FiveGShowcaseSection from "./(components)/FiveGShowcaseSection";
 import PlatformDemoSection from "./(components)/PlatformDemoSection";
 import IndustriesSection from "./(components)/IndustriesSection";
-import Overview from "./(components)/Overview";
-import CoreFocus from "./(components)/CoreFocus";
-import Ecosystem from "./(components)/Ecosystem";
-import Deliverables from "./(components)/Deliverables";
-import Industries from "./(components)/Industries";
-import WhyChoose from "./(components)/WhyChoose";
-import PartnerCTA from "./(components)/PartnerCTA";
+import CapabilitiesSection from "./(components)/CapabilitiesSection";
 import Contact from "./(components)/Contact";
 
 export default function Home() {
-  useEffect(() => {
-    const root = document.documentElement;
-    const previousBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "smooth";
-
-    return () => {
-      root.style.scrollBehavior = previousBehavior;
-    };
-  }, []);
-
   return (
     <>
       <HeroSection />
       <SocialProofStrip />
       <ProblemSolutionSection />
       <CompleteStackSection />
-      <FiveGShowcaseSection />
       <PlatformDemoSection />
       <IndustriesSection />
-      <Overview />
-      <CoreFocus />
-      <Ecosystem />
-      <Deliverables />
-      <Industries />
-      <WhyChoose />
-      <PartnerCTA />
+      <CapabilitiesSection />
       <Contact />
     </>
   );
