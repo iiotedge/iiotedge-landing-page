@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./(components)/Header";
@@ -8,27 +8,69 @@ import AnalyticsClient from "./(components)/AnalyticsClient";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#050816" },
+    { media: "(prefers-color-scheme: dark)", color: "#050816" },
+  ],
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.iiotedge.com"),
-  title: "IIoTEdge | Edge Intelligence for Industrial IoT — From Device to Cloud",
+  title: {
+    default: "IIoTEdge — Edge Intelligence for Industrial IoT",
+    template: "%s | IIoTEdge",
+  },
   description:
-    "IIoTEdge delivers rugged edge hardware and intelligent software to process, analyze, and act on industrial data in real time—secure, scalable, and edge‑first.",
+    "IIoTEdge delivers rugged edge hardware, 5G-ready connectivity and edge AI to process, analyze and act on industrial data in real time — secure, scalable, and edge-first.",
+  keywords: [
+    "Industrial IoT",
+    "Edge Computing",
+    "Edge AI",
+    "5G Industrial",
+    "OPC-UA",
+    "MQTT",
+    "Predictive Maintenance",
+    "Smart Manufacturing",
+    "IIoT Platform",
+  ],
+  authors: [{ name: "IIoTEdge" }],
+  creator: "IIoTEdge",
+  publisher: "IIoTEdge",
+  applicationName: "IIoTEdge",
   alternates: {
     canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     type: "website",
     url: "https://www.iiotedge.com/",
-    title: "IIoTEdge | Edge Intelligence for Industrial IoT — From Device to Cloud",
+    siteName: "IIoTEdge",
+    title: "IIoTEdge — Edge Intelligence for Industrial IoT",
     description:
-      "Process, analyze, and act on industrial data at the edge with IIoTEdge.",
+      "Rugged edge hardware, 5G-ready connectivity and edge AI for real-time industrial decisions.",
     images: [
       {
         url: "/og-image.jpg",
@@ -37,30 +79,45 @@ export const metadata: Metadata = {
         alt: "IIoTEdge — Edge Intelligence for Industrial IoT",
       },
     ],
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "IIoTEdge | Edge Intelligence for Industrial IoT",
+    title: "IIoTEdge — Edge Intelligence for Industrial IoT",
     description:
       "Rugged edge hardware + intelligent software for real-time industrial decisions.",
     images: ["/og-image.jpg"],
+    creator: "@iiotedge",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/IoT Mining Favicon 32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/IoT Mining Logo Icon.png",
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   const orgLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "IIoTEdge",
     url: "https://www.iiotedge.com/",
     email: "info@iiotedge.com",
-    sameAs: [],
-    logo: "https://www.iiotedge.com/logo.svg",
+    logo: "https://www.iiotedge.com/IoT%20Mining%20Logo%20Icon.png",
     slogan: "Smarter industries begin at the edge.",
+    description:
+      "Rugged edge hardware, 5G-ready connectivity and edge AI for industrial operations.",
+    sameAs: [],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bengaluru",
+      addressCountry: "IN",
+    },
   };
 
   const siteLd = {
@@ -74,8 +131,9 @@ export default function RootLayout({
       "query-input": "required name=query",
     },
   };
+
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -87,8 +145,14 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-slate-950 text-slate-100 antialiased`}
       >
+        <a
+          href="#hero"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-cyan-500 focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+        >
+          Skip to content
+        </a>
         <Header />
         <main>{children}</main>
         <Footer />
