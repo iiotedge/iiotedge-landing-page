@@ -8,39 +8,43 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "#core-focus", label: "Capabilities" },
-    { href: "#ecosystem", label: "Platform" },
-    { href: "#deliverables", label: "Deliverables" },
+    { href: "#platform", label: "Platform" },
+    { href: "#demo", label: "Live Demo" },
     { href: "#industries", label: "Industries" },
-    { href: "#why-choose", label: "Why IIoTEdge" },
+    { href: "#capabilities", label: "Capabilities" },
     { href: "#contact", label: "Contact" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link 
-          href="/" 
-          className="flex items-center space-x-3 text-lg font-semibold tracking-tight transition-opacity duration-300 ease-out hover:opacity-80"
+    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <Link
+          href="/"
+          className="group flex items-center gap-3 text-lg font-semibold tracking-tight text-white transition-opacity duration-300 hover:opacity-90"
           aria-label="IIoTEdge Home"
         >
-          <Image
-            src="/IoT Mining Logo Icon.png"
-            alt="IoT Mining Logo"
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
-          />
-          <span>IIoTEdge</span>
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-500/30 bg-slate-900 shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-shadow group-hover:shadow-[0_0_25px_rgba(34,211,238,0.35)]">
+            <Image
+              src="/IoT Mining Logo Icon.png"
+              alt="IoT Mining Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain"
+              priority
+            />
+          </span>
+          <span>
+            IIoT<span className="text-cyan-400">Edge</span>
+          </span>
         </Link>
-        
+
         {/* Desktop Navigation */}
-        <nav className="hidden gap-6 text-sm text-zinc-700 md:flex dark:text-zinc-300" aria-label="Main navigation">
+        <nav className="hidden gap-8 text-sm text-slate-300 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors duration-300 ease-out hover:text-black dark:hover:text-white"
+              className="relative transition-colors duration-300 hover:text-white"
             >
               {link.label}
             </Link>
@@ -50,17 +54,17 @@ export default function Header() {
         {/* Desktop CTA */}
         <Link
           href="#contact"
-          className="hidden rounded-full bg-black px-4 py-2 text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6] md:inline-block"
+          className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-cyan-500/40 md:inline-flex"
           data-event="cta_click"
           data-payload='{"location":"header"}'
         >
-          Contact Us
+          Book a Call
         </Link>
 
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="md:hidden"
+          className="rounded-md p-1.5 text-slate-300 transition-colors hover:bg-slate-900 hover:text-white md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
@@ -94,16 +98,16 @@ export default function Header() {
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <nav
-          className="border-t border-black/10 bg-white dark:border-white/10 dark:bg-black md:hidden"
+          className="border-t border-slate-800/80 bg-slate-950 md:hidden"
           aria-label="Mobile navigation"
         >
-          <div className="mx-auto max-w-6xl px-6 py-4">
+          <div className="mx-auto max-w-7xl px-6 py-4">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-zinc-700 transition-colors hover:text-black dark:text-zinc-300 dark:hover:text-white"
+                  className="text-sm text-slate-300 transition-colors hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -111,12 +115,12 @@ export default function Header() {
               ))}
               <Link
                 href="#contact"
-                className="mt-2 rounded-full bg-black px-4 py-2 text-center text-sm font-medium text-white transition-colors duration-300 ease-out hover:bg-[#383838] dark:bg-white dark:text-black dark:hover:bg-[#e6e6e6]"
+                className="mt-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-cyan-500/20"
                 onClick={() => setMobileMenuOpen(false)}
                 data-event="cta_click"
                 data-payload='{"location":"header_mobile"}'
               >
-                Contact Us
+                Book a Call
               </Link>
             </div>
           </div>

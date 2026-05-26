@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { Play, ArrowRight, Zap, Shield, TrendingUp } from 'lucide-react';
 
 interface Node {
@@ -27,13 +28,27 @@ interface CountUpProps {
 }
 
 const HeroSection = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [nodes, setNodes] = useState<Node[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
 
-  // Generate network nodes
+  // One RAF drives mouse parallax + node motion + canvas paint.
+  // Nothing here calls setState during the loop — values live in refs.
   useEffect(() => {
-    const newNodes = Array.from({ length: 50 }, (_, i) => ({
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d') ?? null;
+
+    if (canvas) {
+      const resize = () => {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
+    }
+
+    const nodes: Node[] = Array.from({ length: 50 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -42,24 +57,7 @@ const HeroSection = () => {
       angle: Math.random() * Math.PI * 2,
       opacity: Math.random() * 0.5 + 0.3,
     }));
-    setNodes(newNodes);
-  }, []);
 
-  // Animate nodes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNodes(prev => prev.map(node => ({
-        ...node,
-        x: (node.x + Math.cos(node.angle) * node.speed + 100) % 100,
-        y: (node.y + Math.sin(node.angle) * node.speed + 100) % 100,
-      })));
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Track mouse for parallax with smooth easing
-  useEffect(() => {
-    let rafId: number;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
@@ -69,75 +67,71 @@ const HeroSection = () => {
       targetX = (e.clientX / window.innerWidth - 0.5) * 20;
       targetY = (e.clientY / window.innerHeight - 0.5) * 20;
     };
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
+    let rafId = 0;
     const animate = () => {
-      // Smooth interpolation with easing
+      // Ease mouse position
       currentX += (targetX - currentX) * 0.1;
       currentY += (targetY - currentY) * 0.1;
-      
-      setMousePos({ x: currentX, y: currentY });
+
+      if (gridRef.current) {
+        gridRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      }
+      if (leftColRef.current) {
+        leftColRef.current.style.transform = `translate3d(${-currentX * 0.5}px, ${-currentY * 0.5}px, 0)`;
+      }
+      if (rightColRef.current) {
+        rightColRef.current.style.transform = `translate3d(${currentX * 0.3}px, ${currentY * 0.3}px, 0)`;
+      }
+
+      // Advance node positions in-place
+      for (const node of nodes) {
+        node.x = (node.x + Math.cos(node.angle) * node.speed + 100) % 100;
+        node.y = (node.y + Math.sin(node.angle) * node.speed + 100) % 100;
+      }
+
+      // Repaint canvas
+      if (canvas && ctx) {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = (b.x - a.x) * w / 100;
+            const dy = (b.y - a.y) * h / 100;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(0, 102, 255, ${(1 - dist / 150) * 0.2})`;
+              ctx.lineWidth = 1;
+              ctx.moveTo(a.x * w / 100, a.y * h / 100);
+              ctx.lineTo(b.x * w / 100, b.y * h / 100);
+              ctx.stroke();
+            }
+          }
+        }
+
+        for (const node of nodes) {
+          ctx.beginPath();
+          ctx.arc(node.x * w / 100, node.y * h / 100, node.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 217, 255, ${node.opacity})`;
+          ctx.fill();
+        }
+      }
+
       rafId = requestAnimationFrame(animate);
     };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     rafId = requestAnimationFrame(animate);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(rafId);
     };
   }, []);
-
-  // Draw connections
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Draw connections
-      nodes.forEach((node, i) => {
-        nodes.slice(i + 1).forEach(other => {
-          const dx = (other.x - node.x) * canvas.width / 100;
-          const dy = (other.y - node.y) * canvas.height / 100;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 102, 255, ${(1 - dist / 150) * 0.2})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(node.x * canvas.width / 100, node.y * canvas.height / 100);
-            ctx.lineTo(other.x * canvas.width / 100, other.y * canvas.height / 100);
-            ctx.stroke();
-          }
-        });
-      });
-
-      // Draw nodes
-      nodes.forEach(node => {
-        ctx.beginPath();
-        ctx.arc(
-          node.x * canvas.width / 100,
-          node.y * canvas.height / 100,
-          node.size,
-          0,
-          Math.PI * 2
-        );
-        ctx.fillStyle = `rgba(0, 217, 255, ${node.opacity})`;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animate);
-    };
-    animate();
-  }, [nodes]);
 
   const MetricCard = ({ icon: Icon, value, label, delay }: MetricCardProps) => (
     <div 
@@ -161,48 +155,54 @@ const HeroSection = () => {
   );
 
   const CountUp = ({ end, duration, delay }: CountUpProps) => {
-    const [count, setCount] = useState<number | string>(0);
+    const [count, setCount] = useState<number | string>(typeof end === 'string' ? end : 0);
 
     useEffect(() => {
       if (typeof end === 'string') {
         setCount(end);
         return;
       }
-      
+
+      // Both the timeout and the interval need to be reachable from the cleanup
+      // (the original code returned clearInterval from inside setTimeout, which
+      // setTimeout silently ignores — so the interval leaked).
+      let counter: ReturnType<typeof setInterval> | undefined;
       const timer = setTimeout(() => {
         let start = 0;
         const increment = end / (duration / 16);
-        const counter = setInterval(() => {
+        counter = setInterval(() => {
           start += increment;
           if (start >= end) {
             setCount(end);
-            clearInterval(counter);
+            if (counter) clearInterval(counter);
           } else {
             setCount(Math.floor(start));
           }
         }, 16);
-        return () => clearInterval(counter);
       }, delay);
-      return () => clearTimeout(timer);
+
+      return () => {
+        clearTimeout(timer);
+        if (counter) clearInterval(counter);
+      };
     }, [end, duration, delay]);
 
     return <>{typeof end === 'string' ? end : count.toLocaleString()}</>;
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-950 overflow-hidden">
+    <section id="hero" className="relative min-h-screen bg-slate-950 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950" />
       
       {/* Grid Pattern */}
-      <div 
+      <div
+        ref={gridRef}
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
                            linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px)`,
           backgroundSize: '50px 50px',
-          transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-          transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'transform',
         }}
       />
@@ -218,13 +218,10 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Left: Text Content */}
-          <div 
+          <div
+            ref={leftColRef}
             className="space-y-8"
-            style={{ 
-              transform: `translate(${-mousePos.x * 0.5}px, ${-mousePos.y * 0.5}px)`,
-              transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform'
-            }}
+            style={{ willChange: 'transform' }}
           >
             {/* Badge */}
             <div 
@@ -298,22 +295,23 @@ const HeroSection = () => {
     </div>
 
           {/* Right: Floating Metrics */}
-          <div 
+          <div
+            ref={rightColRef}
             className="relative h-96 lg:h-[500px]"
-            style={{ 
-              transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)`,
-              transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
-              willChange: 'transform'
-            }}
+            style={{ willChange: 'transform' }}
           >
             {/* Demo Image - Behind floating elements */}
-            <div 
+            <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 lg:w-80 lg:h-80 z-0"
               style={{ animation: 'float 4s ease-in-out 0.3s infinite' }}
             >
-              <img 
-                src="/Demo.png" 
-                alt="Industrial IoT Edge Device" 
+              <Image
+                src="/Demo.png"
+                alt="Industrial IoT Edge Device"
+                width={320}
+                height={320}
+                priority
+                sizes="(min-width: 1024px) 320px, 256px"
                 className="w-full h-full object-contain opacity-90 drop-shadow-2xl"
                 style={{ filter: 'drop-shadow(0 0 30px rgba(0, 102, 255, 0.3))' }}
               />
@@ -340,13 +338,98 @@ const HeroSection = () => {
         </div>
     </div>
 
-            <div 
+            <div
               className="absolute bottom-32 left-10 w-32 h-32 z-10"
               style={{ animation: 'float 3s ease-in-out 1s infinite' }}
             >
               <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-md border border-green-400/30 rounded-2xl p-4 text-center">
                 <div className="text-sm font-bold text-green-300 mb-1">MQTT</div>
                 <div className="text-xs text-slate-400">Protocol</div>
+              </div>
+            </div>
+
+            {/* Floating Image Thumbnails — industrial visual proof */}
+            <div
+              className="absolute top-2 left-1/2 -translate-x-1/2 z-10"
+              style={{ animation: 'float 3.5s ease-in-out 0.2s infinite' }}
+            >
+              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(34,211,238,0.25)] backdrop-blur-md">
+                <Image
+                  src="/images/industries/manufacturing.webp"
+                  alt="Smart factory floor"
+                  fill
+                  sizes="96px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-cyan-300">
+                    Smart Factory
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="absolute top-1/2 -translate-y-1/2 left-0 z-10"
+              style={{ animation: 'float 4s ease-in-out 0.8s infinite' }}
+            >
+              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-blue-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(59,130,246,0.25)] backdrop-blur-md">
+                <Image
+                  src="/images/hardware/circuit-board.webp"
+                  alt="Edge AI compute board"
+                  fill
+                  sizes="96px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-blue-300">
+                    Edge AI
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="absolute bottom-2 left-1/3 z-10"
+              style={{ animation: 'float 3.2s ease-in-out 1.4s infinite' }}
+            >
+              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-emerald-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(16,185,129,0.22)] backdrop-blur-md">
+                <Image
+                  src="/images/platform/dashboard.webp"
+                  alt="Live operations dashboard"
+                  fill
+                  sizes="96px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
+                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-emerald-300">
+                    Live Ops
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="absolute top-44 right-12 z-10 hidden lg:block"
+              style={{ animation: 'float 3.8s ease-in-out 1.8s infinite' }}
+            >
+              <div className="group relative w-16 h-16 overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(34,211,238,0.2)] backdrop-blur-md">
+                <Image
+                  src="/images/industries/energy.webp"
+                  alt="Energy grid"
+                  fill
+                  sizes="64px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-1 left-1 right-1 text-center">
+                  <div className="font-mono text-[7px] uppercase tracking-[0.1em] text-cyan-300">
+                    Grid
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -379,14 +462,16 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      <a
+        href="#platform"
+        aria-label="Scroll to platform section"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 group"
         style={{ animation: 'bounce 2s ease-in-out infinite' }}
       >
-        <div className="w-6 h-10 border-2 border-blue-400/30 rounded-full flex items-start justify-center p-2">
+        <div className="w-6 h-10 border-2 border-blue-400/30 rounded-full flex items-start justify-center p-2 transition-colors group-hover:border-cyan-400/60">
           <div className="w-1 h-3 bg-blue-400 rounded-full animate-pulse" />
         </div>
-      </div>
+      </a>
 
       <style>{`
         @keyframes fadeInUp {
@@ -418,13 +503,8 @@ const HeroSection = () => {
           }
         }
 
-        /* Smooth animation performance */
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
       `}</style>
-    </div>
+    </section>
   );
 };
 

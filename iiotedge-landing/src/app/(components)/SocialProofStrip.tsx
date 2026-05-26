@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Award, Shield, CheckCircle2, Star } from 'lucide-react';
 
 interface Client {
@@ -31,22 +31,7 @@ interface CertBadgeProps {
 }
 
 const SocialProofStrip = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Duplicate content for seamless loop
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    // Clone the content for infinite scroll
-    const scrollContent = scrollContainer.querySelector('.scroll-content');
-    if (scrollContent) {
-      const clone = scrollContent.cloneNode(true);
-      scrollContainer.appendChild(clone);
-    }
-  }, []);
-
-  // Client/Partner logos - Replace with actual client logos
+  // Client/Partner logos — replace with actual client logos
   const clients: Client[] = [
     { name: 'Tech Industries', industry: 'Manufacturing' },
     { name: 'Energy Solutions Co', industry: 'Energy' },
@@ -116,7 +101,7 @@ const SocialProofStrip = () => {
   );
 
   return (
-    <div className="relative bg-slate-950 py-12 overflow-hidden border-y border-slate-800/50">
+    <section id="social-proof" className="relative bg-slate-950 py-12 overflow-hidden border-y border-slate-800/50">
       {/* Gradient overlays for fade effect */}
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
@@ -129,18 +114,23 @@ const SocialProofStrip = () => {
         </div>
       </div>
 
-      {/* Client Logos Row */}
-      <div 
-        ref={scrollRef}
+      {/* Client Logos Row — render the array twice for a seamless loop with the -50% scroll keyframe */}
+      <div
         className="flex overflow-hidden mb-4"
         style={{
           maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
         }}
+        aria-hidden
       >
-        <div className="scroll-content flex animate-scroll">
+        <div className="flex animate-scroll shrink-0">
           {clients.map((client, index) => (
-            <ClientLogo key={index} {...client} />
+            <ClientLogo key={`a-${index}`} {...client} />
+          ))}
+        </div>
+        <div className="flex animate-scroll shrink-0" aria-hidden>
+          {clients.map((client, index) => (
+            <ClientLogo key={`b-${index}`} {...client} />
           ))}
         </div>
       </div>
@@ -222,7 +212,7 @@ const SocialProofStrip = () => {
           -moz-osx-font-smoothing: grayscale;
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 

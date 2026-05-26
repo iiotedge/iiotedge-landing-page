@@ -54,7 +54,8 @@ interface NetworkVisualizationProps {
 const ProblemSolutionSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeView, setActiveView] = useState<'problem' | 'solution'>('problem');
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Intersection observer for scroll animations
   useEffect(() => {
@@ -74,15 +75,19 @@ const ProblemSolutionSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-toggle between problem and solution views
+  // Auto-toggle between problem and solution — stops once user clicks a toggle
   useEffect(() => {
-    if (isVisible) {
-      const interval = setInterval(() => {
-        setActiveView(prev => prev === 'problem' ? 'solution' : 'problem');
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [isVisible]);
+    if (!isVisible || userInteracted) return;
+    const interval = setInterval(() => {
+      setActiveView((prev) => (prev === 'problem' ? 'solution' : 'problem'));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isVisible, userInteracted]);
+
+  const selectView = (view: 'problem' | 'solution') => {
+    setUserInteracted(true);
+    setActiveView(view);
+  };
 
   const problems: Problem[] = [
     {
@@ -334,7 +339,7 @@ const ProblemSolutionSection = () => {
   };
 
   return (
-    <div ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
+    <section id="problem" ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/20 to-slate-950" />
       
@@ -415,7 +420,9 @@ const ProblemSolutionSection = () => {
         <div className="mb-12">
           <div className="flex items-center justify-center space-x-4 mb-8">
             <button
-              onClick={() => setActiveView('problem')}
+              type="button"
+              onClick={() => selectView('problem')}
+              aria-pressed={activeView === 'problem'}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
                 activeView === 'problem'
                   ? 'bg-red-500/20 text-red-300 border-2 border-red-500/50'
@@ -424,13 +431,15 @@ const ProblemSolutionSection = () => {
             >
               Before: Disconnected
             </button>
-            
-            <div className="flex items-center space-x-2 text-slate-500">
+
+            <div className="flex items-center space-x-2 text-slate-500" aria-hidden>
               <ArrowRight className="w-5 h-5" />
             </div>
-            
+
             <button
-              onClick={() => setActiveView('solution')}
+              type="button"
+              onClick={() => selectView('solution')}
+              aria-pressed={activeView === 'solution'}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
                 activeView === 'solution'
                   ? 'bg-blue-500/20 text-blue-300 border-2 border-blue-500/50'
@@ -499,7 +508,7 @@ const ProblemSolutionSection = () => {
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 

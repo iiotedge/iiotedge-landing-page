@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Factory, Zap, Truck, Building2, Droplets, Wind,
-  ArrowRight, CheckCircle, TrendingUp, Shield, 
+import Image from 'next/image';
+import {
+  Factory, Zap, Truck, Building2, Droplets,
+  ArrowRight, CheckCircle, TrendingUp, Shield,
   Battery, Gauge, Thermometer, Activity, Eye,
-  Users, Clock, DollarSign, BarChart3
+  Clock, DollarSign
 } from 'lucide-react';
 
 interface Metric {
@@ -25,6 +26,7 @@ interface Industry {
   metrics: Metric[];
   technologies: string[];
   image: string;
+  imageSrc: string;
 }
 
 interface IndustryCardProps {
@@ -91,7 +93,8 @@ const IndustriesSection = () => {
         { label: 'Cost Savings', value: '$2.4M', icon: DollarSign }
       ],
       technologies: ['OPC-UA', 'MQTT', '5G', 'Edge AI'],
-      image: 'Manufacturing facility'
+      image: 'Manufacturing facility',
+      imageSrc: '/images/industries/manufacturing.webp'
     },
     {
       id: 'energy',
@@ -113,7 +116,8 @@ const IndustriesSection = () => {
         { label: 'Energy Saved', value: '340 MWh', icon: Zap }
       ],
       technologies: ['Modbus', 'DNP3', '5G', 'Predictive Analytics'],
-      image: 'Solar farm'
+      image: 'Solar farm',
+      imageSrc: '/images/industries/energy.webp'
     },
     {
       id: 'ev',
@@ -135,7 +139,8 @@ const IndustriesSection = () => {
         { label: 'Revenue Growth', value: '+156%', icon: TrendingUp }
       ],
       technologies: ['OCPP', 'MQTT', '5G', 'Cloud Analytics'],
-      image: 'EV charging station'
+      image: 'EV charging station',
+      imageSrc: '/images/industries/ev-charging.webp'
     },
     {
       id: 'logistics',
@@ -157,7 +162,8 @@ const IndustriesSection = () => {
         { label: 'Throughput', value: '+35%', icon: TrendingUp }
       ],
       technologies: ['5G', 'Edge Computing', 'Computer Vision', 'RFID'],
-      image: 'Warehouse with AGVs'
+      image: 'Warehouse with AGVs',
+      imageSrc: '/images/industries/logistics.webp'
     },
     {
       id: 'oil-gas',
@@ -179,7 +185,8 @@ const IndustriesSection = () => {
         { label: 'Response Time', value: '<5min', icon: Clock }
       ],
       technologies: ['Modbus', 'Satellite + 5G', 'Edge Analytics', 'IoT Sensors'],
-      image: 'Oil pipeline'
+      image: 'Oil pipeline',
+      imageSrc: '/images/industries/oil-gas.webp'
     },
     {
       id: 'building',
@@ -201,7 +208,8 @@ const IndustriesSection = () => {
         { label: 'ROI Period', value: '18 mo', icon: DollarSign }
       ],
       technologies: ['BACnet', 'Modbus', 'MQTT', 'Cloud Analytics'],
-      image: 'Smart building'
+      image: 'Smart building',
+      imageSrc: '/images/industries/building.webp'
     }
   ];
 
@@ -368,14 +376,25 @@ const IndustriesSection = () => {
 
         {/* Right: Metrics & Visual */}
         <div className="space-y-6">
-          {/* Image placeholder */}
-          <div className={`relative w-full h-64 ${colors.bg} border ${colors.border} rounded-xl overflow-hidden`}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Icon className={`w-24 h-24 ${colors.text} opacity-20`} />
+          {/* Industry image */}
+          <div className={`relative w-full h-64 border ${colors.border} rounded-xl overflow-hidden`}>
+            <Image
+              src={industry.imageSrc}
+              alt={`${industry.title} — ${industry.image}`}
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-950/40 to-transparent" />
+            <div className="absolute top-4 left-4">
+              <span className={`inline-flex items-center gap-2 rounded-full border ${colors.border} ${colors.bg} px-3 py-1 text-[11px] font-mono uppercase tracking-[0.15em] ${colors.text} backdrop-blur`}>
+                <Icon className="w-3.5 h-3.5" />
+                {industry.tagline}
+              </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
-              <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg px-4 py-2">
-                <div className="text-xs text-slate-400 mb-1">Industry Solution</div>
+              <div className="bg-slate-950/80 backdrop-blur-sm border border-slate-700/50 rounded-lg px-4 py-2.5">
+                <div className="text-[10px] uppercase tracking-[0.15em] text-slate-500 mb-1">Deployed in</div>
                 <div className="text-sm font-semibold text-white">{industry.image}</div>
               </div>
             </div>
@@ -406,7 +425,7 @@ const IndustriesSection = () => {
   };
 
   return (
-    <div ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
+    <section id="industries" ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-slate-950 to-slate-950" />
       
@@ -538,7 +557,7 @@ const IndustriesSection = () => {
           to { opacity: 1; }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 

@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Cpu, Wifi, Network, Cloud, Shield, Zap, 
-  Gauge, Activity, Lock, CheckCircle, ArrowRight,
-  Radio, Signal, Globe, Layers
+import {
+  Cpu, Network, Cloud, Shield,
+  Gauge, Activity, CheckCircle, ArrowRight,
+  Radio, Globe, Layers
 } from 'lucide-react';
 
 interface Stat {
@@ -573,7 +573,7 @@ const CompleteStackSection = () => {
   );
 
   return (
-    <div ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
+    <section id="platform" ref={sectionRef} className="relative bg-slate-950 py-24 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-slate-950 to-slate-950" />
       
@@ -678,7 +678,7 @@ const CompleteStackSection = () => {
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 
