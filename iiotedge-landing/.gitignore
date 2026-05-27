@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 
+# local agent / IDE state — never push
+.claude/
+.cursor/
+.windsurf/
+.aider*
+
 # debug
 npm-debug.log*
 yarn-debug.log*
