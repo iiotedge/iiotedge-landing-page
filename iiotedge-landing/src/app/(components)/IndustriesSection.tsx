@@ -41,15 +41,6 @@ interface DetailViewProps {
   industry: Industry;
 }
 
-interface ColorClasses {
-  bg: string;
-  border: string;
-  activeBorder: string;
-  text: string;
-  iconBg: string;
-  glow: string;
-}
-
 const IndustriesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndustry, setActiveIndustry] = useState(0);
@@ -215,103 +206,66 @@ const IndustriesSection = () => {
 
   const IndustryCard = ({ industry, index, isActive, isVisible, onHover }: IndustryCardProps) => {
     const Icon = industry.icon;
-    const colorClasses: Record<string, ColorClasses> = {
-      blue: { 
-        bg: 'from-blue-500/10 to-blue-600/5', 
-        border: 'border-blue-500/30', 
-        activeBorder: 'border-blue-500',
-        text: 'text-blue-400',
-        iconBg: 'bg-blue-500/10',
-        glow: 'shadow-blue-500/50'
-      },
-      yellow: { 
-        bg: 'from-yellow-500/10 to-yellow-600/5', 
-        border: 'border-yellow-500/30', 
-        activeBorder: 'border-yellow-500',
-        text: 'text-yellow-400',
-        iconBg: 'bg-yellow-500/10',
-        glow: 'shadow-yellow-500/50'
-      },
-      green: { 
-        bg: 'from-green-500/10 to-green-600/5', 
-        border: 'border-green-500/30', 
-        activeBorder: 'border-green-500',
-        text: 'text-green-400',
-        iconBg: 'bg-green-500/10',
-        glow: 'shadow-green-500/50'
-      },
-      purple: { 
-        bg: 'from-purple-500/10 to-purple-600/5', 
-        border: 'border-purple-500/30', 
-        activeBorder: 'border-purple-500',
-        text: 'text-purple-400',
-        iconBg: 'bg-purple-500/10',
-        glow: 'shadow-purple-500/50'
-      },
-      orange: { 
-        bg: 'from-orange-500/10 to-orange-600/5', 
-        border: 'border-orange-500/30', 
-        activeBorder: 'border-orange-500',
-        text: 'text-orange-400',
-        iconBg: 'bg-orange-500/10',
-        glow: 'shadow-orange-500/50'
-      },
-      cyan: { 
-        bg: 'from-cyan-500/10 to-cyan-600/5', 
-        border: 'border-cyan-500/30', 
-        activeBorder: 'border-cyan-500',
-        text: 'text-cyan-400',
-        iconBg: 'bg-cyan-500/10',
-        glow: 'shadow-cyan-500/50'
-      }
+    // Icon-only color identity. Card chrome (border/bg) is unified slate so
+    // six different-colored cards don't read as visual noise. Only the
+    // selected card picks up the brand cyan accent + scale.
+    const iconColorMap: Record<string, { text: string; bg: string; ring: string }> = {
+      blue:   { text: 'text-blue-400',   bg: 'bg-blue-500/10',   ring: 'ring-blue-500/30' },
+      yellow: { text: 'text-yellow-400', bg: 'bg-yellow-500/10', ring: 'ring-yellow-500/30' },
+      green:  { text: 'text-green-400',  bg: 'bg-green-500/10',  ring: 'ring-green-500/30' },
+      purple: { text: 'text-purple-400', bg: 'bg-purple-500/10', ring: 'ring-purple-500/30' },
+      orange: { text: 'text-orange-400', bg: 'bg-orange-500/10', ring: 'ring-orange-500/30' },
+      cyan:   { text: 'text-cyan-300',   bg: 'bg-cyan-500/10',   ring: 'ring-cyan-500/30' },
     };
-
-    const colors = colorClasses[industry.color];
+    const iconColors = iconColorMap[industry.color];
 
     return (
       <div
         onMouseEnter={() => onHover(index)}
-        className={`group relative cursor-pointer transition-all duration-500 ease-out ${
-          isActive ? 'scale-105' : ''
+        onFocus={() => onHover(index)}
+        tabIndex={0}
+        role="button"
+        aria-pressed={isActive}
+        className={`group relative cursor-pointer transition-all duration-500 ease-out focus:outline-none ${
+          isActive ? 'scale-[1.03]' : ''
         }`}
         style={{
-          animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none'
+          animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none',
         }}
       >
-        <div className={`relative h-full p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ease-out ${
-          isActive 
-            ? `bg-gradient-to-br ${colors.bg} ${colors.activeBorder} shadow-xl ${colors.glow}` 
-            : `bg-slate-900/30 ${colors.border} hover:${colors.activeBorder}`
-        }`}>
-          {/* Icon */}
-          <div className={`inline-flex p-4 rounded-xl mb-4 ${colors.iconBg} ${
-            isActive ? 'ring-2 ' + colors.activeBorder : ''
-          } transition-all duration-300 ease-out`}>
-            <Icon className={`w-8 h-8 ${colors.text}`} />
+        <div
+          className={`relative h-full rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 ease-out ${
+            isActive
+              ? 'border-cyan-400/60 bg-slate-900/60 shadow-xl shadow-cyan-500/15'
+              : 'border-slate-800 bg-slate-900/30 hover:border-slate-700'
+          }`}
+        >
+          {/* Icon — only place per-industry color survives at the card level */}
+          <div
+            className={`mb-4 inline-flex rounded-xl p-4 ${iconColors.bg} ${
+              isActive ? `ring-2 ${iconColors.ring}` : ''
+            } transition-all duration-300 ease-out`}
+          >
+            <Icon className={`w-8 h-8 ${iconColors.text}`} />
           </div>
 
           {/* Content */}
-          <h3 className="text-xl font-bold text-white mb-2">{industry.title}</h3>
-          <p className={`text-sm mb-4 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
-            {industry.tagline}
-          </p>
+          <h3 className="mb-2 text-xl font-bold text-white">{industry.title}</h3>
+          <p className="mb-4 text-sm font-medium text-slate-400">{industry.tagline}</p>
+          <p className="text-sm leading-relaxed text-slate-400">{industry.description}</p>
 
-          <p className={`text-sm leading-relaxed transition-colors duration-300 ease-out ${
-            isActive ? 'text-slate-300' : 'text-slate-600'
-          }`}>
-            {industry.description}
-          </p>
-
-          {/* Arrow indicator */}
-          <div className={`absolute bottom-6 right-6 transition-all duration-300 ease-out ${
-            isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
-          }`}>
-            <ArrowRight className={`w-5 h-5 ${colors.text}`} />
+          {/* Arrow indicator — appears only on active card */}
+          <div
+            className={`absolute bottom-6 right-6 transition-all duration-300 ease-out ${
+              isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
+            }`}
+          >
+            <ArrowRight className="h-5 w-5 text-cyan-300" />
           </div>
 
-          {/* Active indicator */}
+          {/* Selected-state accent bar at bottom */}
           {isActive && (
-            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${colors.bg} rounded-b-2xl`} />
+            <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r from-cyan-500/0 via-cyan-400/60 to-cyan-500/0" />
           )}
         </div>
       </div>
