@@ -447,29 +447,38 @@ const IndustriesSection = () => {
           <DetailView industry={industries[activeIndustry]} />
         </div>
 
-        {/* Stats Bar */}
-        <div 
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+        {/* Stats band — promoted to a full-width strip with oversized
+            numerals so the fleet metrics actually read as scale signals. */}
+        <div
+          className="relative mb-12 overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900/80 via-slate-950 to-slate-900/80"
           style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 1.2s both' : 'none' }}
         >
-          {[
-            { label: 'Industries Served', value: '6+', icon: Factory },
-            { label: 'Active Deployments', value: '50+', icon: CheckCircle },
-            { label: 'Countries', value: '12+', icon: Building2 },
-            { label: 'Uptime SLA', value: '99.95%', icon: Shield }
-          ].map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <div 
-                key={i}
-                className="bg-slate-900/30 border border-slate-800 rounded-xl p-6 text-center"
-              >
-                <Icon className="w-6 h-6 text-blue-400 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 50% 0%, rgba(34,211,238,0.18), transparent 60%)',
+            }}
+          />
+          <div className="relative grid grid-cols-2 divide-slate-800 lg:grid-cols-4 lg:divide-x">
+            {[
+              { label: 'Industries Served', value: '6+', icon: Factory },
+              { label: 'Active Deployments', value: '50+', icon: CheckCircle },
+              { label: 'Countries', value: '12+', icon: Building2 },
+              { label: 'Uptime SLA', value: '99.95%', icon: Shield },
+            ].map(({ label, value, icon: Icon }) => (
+              <div key={label} className="flex flex-col items-center gap-2 px-6 py-10 text-center">
+                <Icon className="h-5 w-5 text-cyan-300" />
+                <div className="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                  {value}
+                </div>
+                <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  {label}
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         {/* CTA */}

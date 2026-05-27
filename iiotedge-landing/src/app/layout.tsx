@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import AnalyticsClient from "./(components)/AnalyticsClient";
+import StickyCTA from "./(components)/StickyCTA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -159,6 +160,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <StickyCTA />
         <AnalyticsClient />
       </body>
     </html>
