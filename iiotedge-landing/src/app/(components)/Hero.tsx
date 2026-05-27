@@ -248,9 +248,9 @@ const HeroSection = () => {
               className="text-xl text-slate-300 leading-relaxed max-w-xl"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}
             >
-              The core engine for your connected industrial ecosystem.
-              Secure ingestion, edge AI and end-to-end orchestration &mdash; from
-              sensor to cloud, MNRE-compliant by default.
+              From rugged gateways to AI-ready reporting cloud &mdash; one platform
+              that authenticates every packet, schedules every export, and turns
+              noisy telemetry into operational decisions.
             </p>
 
             {/* CTA Buttons */}

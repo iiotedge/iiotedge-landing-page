@@ -174,13 +174,13 @@ export default function CapabilitiesSection() {
               <div className="absolute inset-0 bg-gradient-to-tl from-slate-950/80 via-slate-950/20 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-2">
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
-                  342+ fleet nodes
+                  GitOps rollouts
                 </span>
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
                   &lt;50ms refresh
                 </span>
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
-                  GitOps
+                  Drift detection
                 </span>
               </div>
             </div>

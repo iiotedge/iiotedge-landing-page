@@ -271,7 +271,7 @@ export default function ReportingEngineSection() {
               Step 1 — Pick a type
             </span>
             <h3 className="mt-2 mb-6 text-2xl font-semibold text-white">
-              Eight curated templates, one custom builder
+              Open the wizard
             </h3>
             <BrowserFrame
               src="/images/screenshots/report-types.jpeg"
