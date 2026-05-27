@@ -114,14 +114,14 @@ function BrowserFrame({
           {url}
         </div>
       </div>
-      <div className={`relative w-full ${aspect} bg-slate-100`}>
+      <div className={`relative w-full ${aspect} bg-slate-50`}>
         <Image
           src={src}
           alt={alt}
           fill
           priority={priority}
           sizes="(min-width: 1024px) 60vw, 100vw"
-          className="object-cover object-top"
+          className="object-contain"
         />
       </div>
     </div>
@@ -172,7 +172,7 @@ export default function ReportingEngineSection() {
         {/* Hero screenshot — Reports dashboard */}
         <div className="mt-16">
           <BrowserFrame
-            src="/images/screenshots/reports-dashboard.png"
+            src="/images/screenshots/reports-dashboard.jpeg"
             alt="IIoTEdge Reports dashboard listing report configurations, schedules and live system status"
             url="demo.iiotedge.in/reports"
             priority
@@ -275,7 +275,7 @@ export default function ReportingEngineSection() {
               Eight curated templates, one custom builder
             </h3>
             <BrowserFrame
-              src="/images/screenshots/report-types.png"
+              src="/images/screenshots/report-types.jpeg"
               alt="Report type selection wizard with eight pre-built report templates and a Custom Report option"
               url="demo.iiotedge.in/reports/new"
               aspect="aspect-[16/10]"
@@ -289,7 +289,7 @@ export default function ReportingEngineSection() {
               Map metrics, schedule delivery, ship to stakeholders
             </h3>
             <BrowserFrame
-              src="/images/screenshots/create-report.png"
+              src="/images/screenshots/create-report.jpeg"
               alt="Report configuration form showing report name, output format, data mapping profile, asset selector, time range, metrics and scheduling options"
               url="demo.iiotedge.in/reports/new/configure"
               aspect="aspect-[16/10]"
