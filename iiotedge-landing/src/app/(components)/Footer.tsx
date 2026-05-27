@@ -8,6 +8,7 @@ const navColumns = [
     links: [
       { href: "#platform", label: "End-to-end Stack" },
       { href: "#demo", label: "Live Demo" },
+      { href: "#reports", label: "Reporting Engine" },
       { href: "#capabilities", label: "Capabilities" },
       { href: "#industries", label: "Industries" },
     ],
