@@ -253,24 +253,36 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div 
+            <div
               className="flex flex-col sm:flex-row gap-4"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.8s both' }}
             >
-              <button className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+              <a
+                href="#contact"
+                className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50"
+                data-event="cta_click"
+                data-payload='{"location":"hero_primary"}'
+              >
                 <span className="relative z-10 flex items-center justify-center space-x-2">
-                  <span>Get Free IoT Assessment</span>
+                  <span>Book an Architecture Sprint</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
-    </button>
+              </a>
 
-              <button className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105">
+              <a
+                href="https://demo.iiotedge.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105"
+                data-event="cta_click"
+                data-payload='{"location":"hero_demo"}'
+              >
                 <span className="flex items-center justify-center space-x-2">
                   <Play className="w-5 h-5 fill-current" />
-                  <span>Watch 2-Min Demo</span>
+                  <span>Launch Live Demo</span>
                 </span>
-              </button>
+              </a>
             </div>
 
             {/* Trust Bar */}

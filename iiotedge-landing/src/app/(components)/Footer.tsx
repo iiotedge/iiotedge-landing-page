@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Linkedin, Github, Twitter } from "lucide-react";
+import { Mail, MapPin, Linkedin, Github, ExternalLink } from "lucide-react";
 
 const navColumns = [
   {
@@ -23,9 +23,9 @@ const navColumns = [
 ];
 
 const socials = [
-  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Linkedin },
-  { href: "https://github.com", label: "GitHub", icon: Github },
-  { href: "https://twitter.com", label: "Twitter", icon: Twitter },
+  { href: "https://www.linkedin.com/company/iiotedge", label: "LinkedIn", icon: Linkedin },
+  { href: "https://github.com/iiotedge", label: "GitHub", icon: Github },
+  { href: "https://demo.iiotedge.in/", label: "Live Demo", icon: ExternalLink },
 ];
 
 export default function Footer() {

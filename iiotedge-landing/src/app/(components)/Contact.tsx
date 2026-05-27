@@ -150,7 +150,7 @@ export default function Contact() {
                 </div>
               </a>
               <a
-                href="tel:+919876543210"
+                href="tel:+918506031507"
                 className="group flex items-center gap-3 text-slate-300 transition-colors hover:text-white"
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-slate-900 group-hover:border-cyan-500/40 group-hover:bg-cyan-500/5">
@@ -158,7 +158,7 @@ export default function Contact() {
                 </span>
                 <div>
                   <div className="text-xs uppercase tracking-[0.2em] text-slate-500">Talk to us</div>
-                  <div className="text-sm font-medium">+91 98765 43210</div>
+                  <div className="text-sm font-medium">+91 85060 31507</div>
                 </div>
               </a>
               <div className="flex items-center gap-3 text-slate-300">

@@ -87,7 +87,6 @@ export const metadata: Metadata = {
     description:
       "Rugged edge hardware + intelligent software for real-time industrial decisions.",
     images: ["/og-image.jpg"],
-    creator: "@iiotedge",
   },
   icons: {
     icon: [
@@ -109,10 +108,14 @@ export default function RootLayout({
     url: "https://www.iiotedge.com/",
     email: "info@iiotedge.com",
     logo: "https://www.iiotedge.com/IoT%20Mining%20Logo%20Icon.png",
-    slogan: "Smarter industries begin at the edge.",
+    slogan: "Building the brain behind the machine.",
     description:
       "Rugged edge hardware, 5G-ready connectivity and edge AI for industrial operations.",
-    sameAs: [],
+    telephone: "+91-85060-31507",
+    sameAs: [
+      "https://www.linkedin.com/company/iiotedge",
+      "https://github.com/iiotedge",
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bengaluru",
