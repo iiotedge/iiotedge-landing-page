@@ -89,13 +89,8 @@ export const metadata: Metadata = {
       "Rugged edge hardware + intelligent software for real-time industrial decisions.",
     images: ["/og-image.jpg"],
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/IoT Mining Favicon 32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/IoT Mining Logo Icon.png",
-  },
+  // Icons are auto-generated from src/app/icon.png and src/app/apple-icon.png
+  // (Next.js App Router file convention) so no manual `icons` entries needed.
   category: "technology",
 };
 
