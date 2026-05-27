@@ -95,13 +95,11 @@ function BrowserFrame({
   src,
   alt,
   url,
-  priority = false,
-  aspect = "aspect-[16/10]",
+  aspect = "aspect-[16/9]",
 }: {
   src: string;
   alt: string;
   url: string;
-  priority?: boolean;
   aspect?: string;
 }) {
   return (
@@ -115,11 +113,14 @@ function BrowserFrame({
         </div>
       </div>
       <div className={`relative w-full ${aspect} bg-slate-50`}>
+        {/* All three Reporting Engine screenshots are eager-loaded so a print/PDF
+            capture catches them even without the user scrolling. They're below the
+            fold but central to the section's credibility. */}
         <Image
           src={src}
           alt={alt}
           fill
-          priority={priority}
+          priority
           sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-contain"
         />
@@ -175,8 +176,6 @@ export default function ReportingEngineSection() {
             src="/images/screenshots/reports-dashboard.jpeg"
             alt="IIoTEdge Reports dashboard listing report configurations, schedules and live system status"
             url="demo.iiotedge.in/reports"
-            priority
-            aspect="aspect-[16/9]"
           />
         </div>
 
@@ -278,7 +277,6 @@ export default function ReportingEngineSection() {
               src="/images/screenshots/report-types.jpeg"
               alt="Report type selection wizard with eight pre-built report templates and a Custom Report option"
               url="demo.iiotedge.in/reports/new"
-              aspect="aspect-[16/10]"
             />
           </div>
           <div>
@@ -292,7 +290,6 @@ export default function ReportingEngineSection() {
               src="/images/screenshots/create-report.jpeg"
               alt="Report configuration form showing report name, output format, data mapping profile, asset selector, time range, metrics and scheduling options"
               url="demo.iiotedge.in/reports/new/configure"
-              aspect="aspect-[16/10]"
             />
           </div>
         </div>
