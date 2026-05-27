@@ -113,20 +113,20 @@ const ProblemSolutionSection = () => {
   const solutions: Solution[] = [
     {
       icon: Network,
-      title: "Universal Protocol Integration",
-      description: "OPC-UA, MQTT, Modbus - connect any device seamlessly",
+      title: "Universal Rule-Chain Ingestion",
+      description: "OPC-UA, MQTT, Modbus, BACnet — authenticated routing to optimized PostgreSQL instances per device type.",
       color: "blue"
     },
     {
       icon: Zap,
-      title: "Edge + 5G Hybrid Architecture",
-      description: "Process locally with <1ms latency, sync to cloud when needed",
+      title: "Edge + 5G with Bi-Directional ACKs",
+      description: "Sub-millisecond local decisions, cache-aside Redis OTP per payload, strict ACK confirmation on every downlink.",
       color: "cyan"
     },
     {
       icon: Shield,
-      title: "Plug-and-Play Scalability",
-      description: "Add nodes instantly, pay as you grow, enterprise-grade security built in",
+      title: "Zero-Touch Provisioning at Scale",
+      description: "Devices self-register, validate identity, receive cryptographic session tokens — no manual onboarding.",
       color: "blue"
     }
   ];
@@ -364,12 +364,12 @@ const ProblemSolutionSection = () => {
             </span>
           </h2>
           
-          <p 
+          <p
             className="text-xl text-slate-400 max-w-3xl mx-auto"
             style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 0.6s both' : 'none' }}
           >
-            Legacy infrastructure wasn't built for the real-time, AI-powered future. 
-            Here's what's holding you back—and how we fix it.
+            Legacy infrastructure wasn&apos;t built for authenticated edge ingestion, MNRE-grade compliance, or AI-ready data pipelines.
+            Here&apos;s what&apos;s holding you back &mdash; and how we fix it at the architecture layer.
           </p>
         </div>
 

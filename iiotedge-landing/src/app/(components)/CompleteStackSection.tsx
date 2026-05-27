@@ -83,10 +83,10 @@ const CompleteStackSection = () => {
       title: 'Edge Intelligence',
       tagline: 'Process at the Source',
       features: [
-        'Smart gateways & controllers',
-        'AI-powered edge computing',
-        'Real-time decision making',
-        'Industrial-grade hardware'
+        'Rugged Arm, x86 and RISC-V gateways with on-device GPU',
+        'Zero-Touch Provisioning with cryptographic session tokens',
+        'Containerized edge workloads, GitOps-managed across the fleet',
+        'Offline-first runtime with deterministic telemetry buffering',
       ],
       stats: [
         { label: 'Response Time', value: '<10ms' },
@@ -99,15 +99,13 @@ const CompleteStackSection = () => {
       id: '5g',
       icon: Radio,
       color: 'purple',
-      title: '5G Network Solutions',
-      tagline: 'Ultra-Fast Connectivity',
+      title: '5G & Secure Transport',
+      tagline: 'Ultra-Fast, Authenticated Connectivity',
       features: [
-        'Private 5G network deployment',
-        'Ultra-low latency (<1ms)',
-        'Massive device connectivity (1M+ devices/km²)',
-        'Industrial-grade reliability (99.999% uptime)',
-        'Seamless infrastructure integration',
-        'Edge-to-cloud synchronization'
+        'Private 5G deployments with sub-millisecond latency',
+        'Bi-directional MQTT closed-loop with strict ACK confirmation',
+        'Cache-aside Redis OTP validation on every MQTT payload',
+        'Massive device density (1M+ devices/km²) at 99.999% reliability',
       ],
       stats: [
         { label: 'Latency', value: '<1ms' },
@@ -120,13 +118,13 @@ const CompleteStackSection = () => {
       id: 'protocols',
       icon: Network,
       color: 'cyan',
-      title: 'Protocol Integration',
-      tagline: 'Universal Compatibility',
+      title: 'Ingestion & Rule Chain',
+      tagline: 'Universal Compatibility, Authenticated Routing',
       features: [
-        'OPC-UA, Modbus, MQTT native support',
-        '342+ device types supported',
-        'Plug-and-play compatibility',
-        'Legacy system bridging'
+        'Native OPC-UA, Modbus, MQTT, BACnet and OCPP support',
+        'Dynamic multi-device routing — Inverters, Smart Meters, DAQs',
+        'Flattened JSON arrays parsed into optimized PostgreSQL instances',
+        'MNRE-compliant DER ingestion architecture for renewable assets',
       ],
       stats: [
         { label: 'Protocols', value: '20+' },
@@ -139,13 +137,13 @@ const CompleteStackSection = () => {
       id: 'cloud',
       icon: Cloud,
       color: 'blue',
-      title: 'Cloud & AI Platform',
+      title: 'Cloud, Reporting & AI',
       tagline: 'Intelligence at Scale',
       features: [
-        'Secure cloud infrastructure (AWS/Azure/GCP)',
-        'Predictive analytics & ML models',
-        'Real-time dashboards',
-        'Enterprise integrations (ERP, MES, SCADA)'
+        'Reporting Engine — device-profile selection, metric mapping, scheduled exports',
+        'Decoupled async event streams between config layer and processing service',
+        'AI / LLM predictive maintenance insights (in delivery)',
+        'Enterprise integrations across ERP, MES and SCADA',
       ],
       stats: [
         { label: 'ML Accuracy', value: '94%+' },
@@ -588,22 +586,23 @@ const CompleteStackSection = () => {
             <span>Complete Stack</span>
           </div>
           
-          <h2 
+          <h2
             className="text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 0.4s both' : 'none' }}
           >
-            End-to-End Industrial IoT
+            The core engine for your
             <span className="block mt-2 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Infrastructure
+              connected industrial ecosystem
             </span>
           </h2>
-          
-          <p 
+
+          <p
             className="text-xl text-slate-400 max-w-3xl mx-auto"
             style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 0.6s both' : 'none' }}
           >
-            From edge devices to cloud intelligence, we provide everything you need 
-            to build, scale, and optimize your industrial operations.
+            Four engineered layers &mdash; rugged edge hardware, authenticated 5G transport,
+            a rule-chain ingestion fabric, and an AI-ready reporting cloud &mdash; ship as
+            one platform with shared identity, security and observability.
           </p>
         </div>
 

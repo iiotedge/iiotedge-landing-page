@@ -229,11 +229,11 @@ const HeroSection = () => {
               style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
             >
               <Zap className="w-4 h-4" />
-              <span>5G-Enabled Industrial IoT Platform</span>
+              <span>Building the brain behind the machine</span>
             </div>
 
             {/* Main Headline */}
-            <h1 
+            <h1
               className="text-5xl lg:text-7xl font-bold text-white leading-tight"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.4s both' }}
             >
@@ -244,12 +244,13 @@ const HeroSection = () => {
             </h1>
 
             {/* Subheadline */}
-            <p 
+            <p
               className="text-xl text-slate-300 leading-relaxed max-w-xl"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}
             >
-              Deploy AI-powered IoT solutions with 5G connectivity that transform factories, 
-              energy systems, and industrial operations in real-time
+              The core engine for your connected industrial ecosystem.
+              Secure ingestion, edge AI and end-to-end orchestration &mdash; from
+              sensor to cloud, MNRE-compliant by default.
             </p>
 
             {/* CTA Buttons */}

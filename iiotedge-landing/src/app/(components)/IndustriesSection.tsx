@@ -77,15 +77,15 @@ const IndustriesSection = () => {
       id: 'manufacturing',
       icon: Factory,
       title: 'Smart Manufacturing',
-      tagline: 'Industry 4.0 Ready',
+      tagline: 'Industry 4.0 + OEE',
       color: 'blue',
-      description: 'Transform your factory floor with real-time monitoring, predictive maintenance, and AI-powered quality control.',
+      description: 'Real-time OEE tracking, predictive maintenance and AI-powered quality control wired into your plant floor without ripping out existing PLCs.',
       useCases: [
         'Production line optimization',
+        'OEE tracking & visualization',
+        'Predictive maintenance (AI / LLM)',
         'Quality control automation',
-        'Predictive maintenance',
         'Energy management',
-        'OEE tracking'
       ],
       metrics: [
         { label: 'Uptime Increase', value: '23%', icon: TrendingUp },
@@ -99,23 +99,23 @@ const IndustriesSection = () => {
     {
       id: 'energy',
       icon: Zap,
-      title: 'Energy & Utilities',
-      tagline: 'Smart Grid Management',
+      title: 'Energy & Renewables',
+      tagline: 'MNRE-compliant DER architecture',
       color: 'yellow',
-      description: 'Optimize energy distribution, integrate renewables, and monitor critical infrastructure in real-time.',
+      description: 'Production-grade ingestion and control rule chains for Distributed Energy Resources — solar, inverters, smart meters and grid assets — with cryptographic device identity and bi-directional MQTT ACKs.',
       useCases: [
-        'Smart grid management',
-        'Renewable integration',
-        'Asset monitoring',
-        'Load balancing',
-        'Outage prediction'
+        'MNRE-compliant DER ingestion',
+        'Zero-Touch device onboarding',
+        'Inverter & smart-meter routing',
+        'Load balancing & grid orchestration',
+        'Outage prediction',
       ],
       metrics: [
         { label: 'Grid Efficiency', value: '+18%', icon: Activity },
         { label: 'Downtime Reduced', value: '67%', icon: Clock },
         { label: 'Energy Saved', value: '340 MWh', icon: Zap }
       ],
-      technologies: ['Modbus', 'DNP3', '5G', 'Predictive Analytics'],
+      technologies: ['Modbus', 'DNP3', 'MQTT + ACK', 'Redis OTP'],
       image: 'Solar farm',
       imageSrc: '/images/industries/energy.webp'
     },

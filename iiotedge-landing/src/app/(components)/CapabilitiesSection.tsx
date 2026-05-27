@@ -14,16 +14,16 @@ import {
 
 const hardwareBullets = [
   "Arm, x86 and RISC-V gateways with modular I/O and on-device GPU",
+  "Zero-Touch Provisioning with cache-aside Redis OTP authentication",
+  "Bi-directional MQTT closed loop with strict ACK confirmation",
   "IP67-rated enclosures certified for plant, mining and energy sites",
-  "Reference kits with sensors, starter workloads and field cabling",
-  "Hot-swappable cellular, LoRa, Ethernet, RS-485 and 4G/5G modules",
 ];
 
 const platformBullets = [
-  "GitOps configuration management with one-click rollbacks",
-  "Fleet-wide observability for workloads, health and compliance",
+  "Reporting Engine — device-profile selection, metric mapping, scheduled exports",
+  "Decoupled async event streams between configuration layer and processing service",
   "Edge model registry with drift detection and automated retraining",
-  "Closed-loop feedback on confidence, anomalies and inference latency",
+  "AI / LLM predictive maintenance insights (in delivery)",
 ];
 
 const capabilities = [
