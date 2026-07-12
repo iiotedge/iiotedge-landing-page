@@ -1,13 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Linkedin, Github, Twitter } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Linkedin,
+  Github,
+  ExternalLink,
+  Phone,
+  Shield,
+  Award,
+  CheckCircle2,
+  Star,
+} from "lucide-react";
+
+// Coming-soon resources / legal routes don't exist as pages yet — they route to
+// #contact so the user lands somewhere useful instead of a 404. Swap to real
+// hrefs once the pages ship.
+const COMING_SOON = "#contact";
 
 const navColumns = [
   {
     heading: "Platform",
     links: [
       { href: "#platform", label: "End-to-end Stack" },
-      { href: "#demo", label: "Live Demo" },
+      { href: "#demo", label: "Live Console" },
+      { href: "#reports", label: "Reporting Engine" },
       { href: "#capabilities", label: "Capabilities" },
       { href: "#industries", label: "Industries" },
     ],
@@ -17,15 +34,58 @@ const navColumns = [
     links: [
       { href: "#problem", label: "Why Edge" },
       { href: "#contact", label: "Contact" },
-      { href: "mailto:info@iiotedge.com", label: "info@iiotedge.com" },
+      { href: COMING_SOON, label: "Careers" },
+      { href: COMING_SOON, label: "About" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { href: COMING_SOON, label: "Docs" },
+      { href: COMING_SOON, label: "Architecture Guides" },
+      { href: "#industries", label: "Case Studies" },
+      { href: COMING_SOON, label: "Engineering Blog" },
+      {
+        href: "https://demo.iiotedge.in/",
+        label: "Live Demo",
+        external: true,
+      },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { href: COMING_SOON, label: "Privacy Policy" },
+      { href: COMING_SOON, label: "Terms of Service" },
+      { href: COMING_SOON, label: "Security" },
+      { href: COMING_SOON, label: "Data Processing Agreement" },
     ],
   },
 ];
 
 const socials = [
-  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Linkedin },
-  { href: "https://github.com", label: "GitHub", icon: Github },
-  { href: "https://twitter.com", label: "Twitter", icon: Twitter },
+  {
+    href: "https://www.linkedin.com/company/iiotedge",
+    label: "LinkedIn",
+    icon: Linkedin,
+  },
+  {
+    href: "https://github.com/iiotedge",
+    label: "GitHub",
+    icon: Github,
+  },
+  {
+    href: "https://demo.iiotedge.in/",
+    label: "Live Demo",
+    icon: ExternalLink,
+  },
+];
+
+const COMPLIANCE = [
+  { icon: Shield, label: "ISO 27001" },
+  { icon: Award, label: "Industry 4.0 Ready" },
+  { icon: CheckCircle2, label: "CE Marked" },
+  { icon: Star, label: "AWS Partner" },
 ];
 
 export default function Footer() {
@@ -41,9 +101,10 @@ export default function Footer() {
         }}
       />
       <div className="relative mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-12">
-          {/* Brand */}
-          <div className="md:col-span-4">
+        {/* Top: brand + 4 nav columns */}
+        <div className="grid gap-10 lg:grid-cols-12">
+          {/* Brand block */}
+          <div className="lg:col-span-4">
             <Link
               href="/"
               className="group inline-flex items-center gap-3 text-lg font-semibold tracking-tight text-white"
@@ -62,8 +123,9 @@ export default function Footer() {
                 IIoT<span className="text-cyan-400">Edge</span>
               </span>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">
-              Rugged edge hardware and intelligent software for industrial operations. Process, analyze and act on data
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
+              Building the brain behind the machine. Rugged edge hardware and intelligent
+              software for industrial operations &mdash; process, analyze and act on data
               where it&apos;s created.
             </p>
 
@@ -75,36 +137,21 @@ export default function Footer() {
                 <Mail className="h-4 w-4 text-cyan-400" />
                 info@iiotedge.com
               </a>
+              <a
+                href="tel:+918506031507"
+                className="group flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
+              >
+                <Phone className="h-4 w-4 text-cyan-400" />
+                +91 85060 31507
+              </a>
               <div className="flex items-center gap-2 text-slate-400">
                 <MapPin className="h-4 w-4 text-cyan-400" />
                 Bengaluru, India
               </div>
             </div>
-          </div>
 
-          {/* Nav columns */}
-          {navColumns.map((column) => (
-            <div key={column.heading} className="md:col-span-3">
-              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">{column.heading}</h4>
-              <ul className="mt-4 space-y-3 text-sm">
-                {column.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-slate-400 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          {/* Newsletter / Socials */}
-          <div className="md:col-span-2">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Follow</h4>
-            <ul className="mt-4 flex gap-3">
+            {/* Socials */}
+            <ul className="mt-6 flex gap-3">
               {socials.map(({ href, label, icon: Icon }) => (
                 <li key={label}>
                   <a
@@ -120,12 +167,66 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
+          {/* Nav columns */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
+            {navColumns.map((column) => (
+              <div key={column.heading}>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  {column.heading}
+                </h4>
+                <ul className="mt-4 space-y-3 text-sm">
+                  {column.links.map((link) => (
+                    <li key={`${column.heading}-${link.label}`}>
+                      {"external" in link && link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="inline-flex items-center gap-1 text-slate-400 transition-colors hover:text-white"
+                        >
+                          {link.label}
+                          <ExternalLink className="h-3 w-3 opacity-70" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-slate-400 transition-colors hover:text-white"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-slate-800/80 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center">
+        {/* Compliance strip */}
+        <div className="mt-12 rounded-xl border border-slate-800 bg-slate-900/40 px-6 py-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500">
+              Compliance &amp; Certifications
+            </span>
+            {COMPLIANCE.map(({ icon: Icon, label }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-2 text-xs font-medium text-slate-300"
+              >
+                <Icon className="h-3.5 w-3.5 text-cyan-300" />
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom legal strip */}
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-slate-800/80 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center">
           <div>&copy; {new Date().getFullYear()} IIoTEdge. All rights reserved.</div>
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
-            Smarter industries begin at the edge
+            Built in Bengaluru &middot; Deployed across 12+ countries
           </div>
         </div>
       </div>

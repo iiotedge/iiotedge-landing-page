@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./(components)/Header";
 import Footer from "./(components)/Footer";
 import AnalyticsClient from "./(components)/AnalyticsClient";
+import StickyCTA from "./(components)/StickyCTA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,15 +88,9 @@ export const metadata: Metadata = {
     description:
       "Rugged edge hardware + intelligent software for real-time industrial decisions.",
     images: ["/og-image.jpg"],
-    creator: "@iiotedge",
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/IoT Mining Favicon 32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/IoT Mining Logo Icon.png",
-  },
+  // Icons are auto-generated from src/app/icon.png and src/app/apple-icon.png
+  // (Next.js App Router file convention) so no manual `icons` entries needed.
   category: "technology",
 };
 
@@ -109,10 +104,14 @@ export default function RootLayout({
     url: "https://www.iiotedge.com/",
     email: "info@iiotedge.com",
     logo: "https://www.iiotedge.com/IoT%20Mining%20Logo%20Icon.png",
-    slogan: "Smarter industries begin at the edge.",
+    slogan: "Building the brain behind the machine.",
     description:
       "Rugged edge hardware, 5G-ready connectivity and edge AI for industrial operations.",
-    sameAs: [],
+    telephone: "+91-85060-31507",
+    sameAs: [
+      "https://www.linkedin.com/company/iiotedge",
+      "https://github.com/iiotedge",
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bengaluru",
@@ -156,6 +155,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <StickyCTA />
         <AnalyticsClient />
       </body>
     </html>

@@ -1,0 +1,14 @@
+# Local agent / IDE state — never push
+.claude/
+.cursor/
+.windsurf/
+.aider*
+
+# macOS
+.DS_Store
+
+# Editor swap / lock files
+*.swp
+*.swo
+.idea/
+.vscode/

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Play, ArrowRight, Zap, Shield, TrendingUp } from 'lucide-react';
+import { Play, ArrowRight, Zap, Shield, TrendingUp, MapPin } from 'lucide-react';
 
 interface Node {
   id: number;
@@ -229,11 +229,11 @@ const HeroSection = () => {
               style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
             >
               <Zap className="w-4 h-4" />
-              <span>5G-Enabled Industrial IoT Platform</span>
+              <span>Building the brain behind the machine</span>
             </div>
 
             {/* Main Headline */}
-            <h1 
+            <h1
               className="text-5xl lg:text-7xl font-bold text-white leading-tight"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.4s both' }}
             >
@@ -244,33 +244,46 @@ const HeroSection = () => {
             </h1>
 
             {/* Subheadline */}
-            <p 
+            <p
               className="text-xl text-slate-300 leading-relaxed max-w-xl"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}
             >
-              Deploy AI-powered IoT solutions with 5G connectivity that transform factories, 
-              energy systems, and industrial operations in real-time
+              From rugged gateways to AI-ready reporting cloud &mdash; one platform
+              that authenticates every packet, schedules every export, and turns
+              noisy telemetry into operational decisions.
             </p>
 
             {/* CTA Buttons */}
-            <div 
+            <div
               className="flex flex-col sm:flex-row gap-4"
               style={{ animation: 'fadeInUp 0.8s ease-out 0.8s both' }}
             >
-              <button className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+              <a
+                href="#contact"
+                className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold overflow-hidden transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50"
+                data-event="cta_click"
+                data-payload='{"location":"hero_primary"}'
+              >
                 <span className="relative z-10 flex items-center justify-center space-x-2">
-                  <span>Get Free IoT Assessment</span>
+                  <span>Book an Architecture Sprint</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
-    </button>
+              </a>
 
-              <button className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105">
+              <a
+                href="https://demo.iiotedge.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105"
+                data-event="cta_click"
+                data-payload='{"location":"hero_demo"}'
+              >
                 <span className="flex items-center justify-center space-x-2">
                   <Play className="w-5 h-5 fill-current" />
-                  <span>Watch 2-Min Demo</span>
+                  <span>Launch Live Demo</span>
                 </span>
-              </button>
+              </a>
             </div>
 
             {/* Trust Bar */}
@@ -282,12 +295,12 @@ const HeroSection = () => {
                 <Shield className="w-4 h-4 text-blue-400" />
                 <span>ISO Certified</span>
               </div>
-              <div className="text-slate-600">|</div>
+              <div className="text-slate-600" aria-hidden>|</div>
               <div className="flex items-center space-x-2 text-sm text-slate-400">
-                <TrendingUp className="w-4 h-4 text-blue-400" />
-                <span>342+ Active Nodes</span>
+                <MapPin className="w-4 h-4 text-blue-400" />
+                <span>Built in Bengaluru</span>
               </div>
-              <div className="text-slate-600">|</div>
+              <div className="text-slate-600" aria-hidden>|</div>
               <div className="text-sm text-slate-400">
                 12,000+ Data Points Secured
               </div>
@@ -317,53 +330,22 @@ const HeroSection = () => {
               />
             </div>
 
-            {/* Protocol Badges */}
-            <div 
-              className="absolute top-0 left-0 w-32 h-32 z-10"
-              style={{ animation: 'float 3s ease-in-out infinite' }}
-            >
-              <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-md border border-blue-400/30 rounded-2xl p-4 text-center">
-                <div className="text-sm font-bold text-blue-300 mb-1">OPC-UA</div>
-                <div className="text-xs text-slate-400">Protocol</div>
-              </div>
-            </div>
-
-            <div 
-              className="absolute top-20 right-0 w-28 h-28 z-10"
-              style={{ animation: 'float 3s ease-in-out 0.5s infinite' }}
-            >
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-purple-400/30 rounded-2xl p-4 text-center">
-                <div className="text-sm font-bold text-purple-300 mb-1">5G</div>
-                <div className="text-xs text-slate-400">Network</div>
-        </div>
-    </div>
-
+            {/* Floating industrial thumbnails — three image cards arranged so they don't crowd the metric stack on bottom-right. Protocol text-badges removed to keep one visual language (images, not mixed images + text chips). */}
             <div
-              className="absolute bottom-32 left-10 w-32 h-32 z-10"
-              style={{ animation: 'float 3s ease-in-out 1s infinite' }}
-            >
-              <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-md border border-green-400/30 rounded-2xl p-4 text-center">
-                <div className="text-sm font-bold text-green-300 mb-1">MQTT</div>
-                <div className="text-xs text-slate-400">Protocol</div>
-              </div>
-            </div>
-
-            {/* Floating Image Thumbnails — industrial visual proof */}
-            <div
-              className="absolute top-2 left-1/2 -translate-x-1/2 z-10"
+              className="absolute top-0 left-0 z-10"
               style={{ animation: 'float 3.5s ease-in-out 0.2s infinite' }}
             >
-              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(34,211,238,0.25)] backdrop-blur-md">
+              <div className="group relative w-24 h-24 lg:w-28 lg:h-28 overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(34,211,238,0.25)] backdrop-blur-md">
                 <Image
                   src="/images/industries/manufacturing.webp"
                   alt="Smart factory floor"
                   fill
-                  sizes="96px"
+                  sizes="112px"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                 <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-cyan-300">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-cyan-300">
                     Smart Factory
                   </div>
                 </div>
@@ -371,20 +353,20 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="absolute top-1/2 -translate-y-1/2 left-0 z-10"
+              className="absolute top-8 right-0 z-10"
               style={{ animation: 'float 4s ease-in-out 0.8s infinite' }}
             >
-              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-blue-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(59,130,246,0.25)] backdrop-blur-md">
+              <div className="group relative w-24 h-24 lg:w-28 lg:h-28 overflow-hidden rounded-2xl border border-blue-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(59,130,246,0.25)] backdrop-blur-md">
                 <Image
                   src="/images/hardware/circuit-board.webp"
                   alt="Edge AI compute board"
                   fill
-                  sizes="96px"
+                  sizes="112px"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                 <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-blue-300">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-blue-300">
                     Edge AI
                   </div>
                 </div>
@@ -392,42 +374,21 @@ const HeroSection = () => {
             </div>
 
             <div
-              className="absolute bottom-2 left-1/3 z-10"
+              className="absolute bottom-8 left-0 z-10 hidden sm:block"
               style={{ animation: 'float 3.2s ease-in-out 1.4s infinite' }}
             >
-              <div className="group relative w-20 h-20 lg:w-24 lg:h-24 overflow-hidden rounded-2xl border border-emerald-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(16,185,129,0.22)] backdrop-blur-md">
+              <div className="group relative w-24 h-24 lg:w-28 lg:h-28 overflow-hidden rounded-2xl border border-emerald-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(16,185,129,0.22)] backdrop-blur-md">
                 <Image
                   src="/images/platform/dashboard.webp"
                   alt="Live operations dashboard"
                   fill
-                  sizes="96px"
+                  sizes="112px"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                 <div className="absolute bottom-1.5 left-1.5 right-1.5 text-center">
-                  <div className="font-mono text-[8px] uppercase tracking-[0.12em] text-emerald-300">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-emerald-300">
                     Live Ops
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="absolute top-44 right-12 z-10 hidden lg:block"
-              style={{ animation: 'float 3.8s ease-in-out 1.8s infinite' }}
-            >
-              <div className="group relative w-16 h-16 overflow-hidden rounded-2xl border border-cyan-400/40 bg-slate-900 shadow-[0_10px_40px_rgba(34,211,238,0.2)] backdrop-blur-md">
-                <Image
-                  src="/images/industries/energy.webp"
-                  alt="Energy grid"
-                  fill
-                  sizes="64px"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-                <div className="absolute bottom-1 left-1 right-1 text-center">
-                  <div className="font-mono text-[7px] uppercase tracking-[0.1em] text-cyan-300">
-                    Grid
                   </div>
                 </div>
               </div>
@@ -435,19 +396,19 @@ const HeroSection = () => {
 
             {/* Main Metric Cards */}
             <div className="absolute bottom-0 right-0 space-y-4 w-64 z-10">
-              <MetricCard 
+              <MetricCard
                 icon={Zap}
-                value="99.95"
-                label="Uptime %"
+                value="99.95%"
+                label="Uptime"
                 delay={1.2}
               />
-              <MetricCard 
+              <MetricCard
                 icon={TrendingUp}
                 value={342}
                 label="Active Nodes"
                 delay={1.4}
               />
-              <MetricCard 
+              <MetricCard
                 icon={Shield}
                 value="<1ms"
                 label="5G Latency"

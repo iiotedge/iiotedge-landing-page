@@ -54,7 +54,6 @@ interface NetworkVisualizationProps {
 const ProblemSolutionSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeView, setActiveView] = useState<'problem' | 'solution'>('problem');
-  const [userInteracted, setUserInteracted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   // Intersection observer for scroll animations
@@ -75,19 +74,16 @@ const ProblemSolutionSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-toggle between problem and solution — stops once user clicks a toggle
+  // Auto-cycle the problem/solution card highlight on a 4s rhythm so the two
+  // card columns visually breathe. The Before/After toggle that was here is
+  // gone — see the Unified Network Architecture diagram below.
   useEffect(() => {
-    if (!isVisible || userInteracted) return;
+    if (!isVisible) return;
     const interval = setInterval(() => {
       setActiveView((prev) => (prev === 'problem' ? 'solution' : 'problem'));
     }, 4000);
     return () => clearInterval(interval);
-  }, [isVisible, userInteracted]);
-
-  const selectView = (view: 'problem' | 'solution') => {
-    setUserInteracted(true);
-    setActiveView(view);
-  };
+  }, [isVisible]);
 
   const problems: Problem[] = [
     {
@@ -113,20 +109,20 @@ const ProblemSolutionSection = () => {
   const solutions: Solution[] = [
     {
       icon: Network,
-      title: "Universal Protocol Integration",
-      description: "OPC-UA, MQTT, Modbus - connect any device seamlessly",
+      title: "Universal Rule-Chain Ingestion",
+      description: "OPC-UA, MQTT, Modbus, BACnet — authenticated routing to optimized PostgreSQL instances per device type.",
       color: "blue"
     },
     {
       icon: Zap,
-      title: "Edge + 5G Hybrid Architecture",
-      description: "Process locally with <1ms latency, sync to cloud when needed",
+      title: "Edge + 5G with Bi-Directional ACKs",
+      description: "Sub-millisecond local decisions, cache-aside Redis OTP per payload, strict ACK confirmation on every downlink.",
       color: "cyan"
     },
     {
       icon: Shield,
-      title: "Plug-and-Play Scalability",
-      description: "Add nodes instantly, pay as you grow, enterprise-grade security built in",
+      title: "Zero-Touch Provisioning at Scale",
+      description: "Devices self-register, validate identity, receive cryptographic session tokens — no manual onboarding.",
       color: "blue"
     }
   ];
@@ -364,12 +360,12 @@ const ProblemSolutionSection = () => {
             </span>
           </h2>
           
-          <p 
+          <p
             className="text-xl text-slate-400 max-w-3xl mx-auto"
             style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 0.6s both' : 'none' }}
           >
-            Legacy infrastructure wasn't built for the real-time, AI-powered future. 
-            Here's what's holding you back—and how we fix it.
+            Legacy infrastructure wasn&apos;t built for authenticated edge ingestion, MNRE-grade compliance, or AI-ready data pipelines.
+            Here&apos;s what&apos;s holding you back &mdash; and how we fix it at the architecture layer.
           </p>
         </div>
 
@@ -416,41 +412,19 @@ const ProblemSolutionSection = () => {
           </div>
         </div>
 
-        {/* Before/After Visualization */}
+        {/* Unified Network Architecture diagram — always renders the solution
+            view. The Before/After toggle that lived here looked interactive in
+            a static capture but didn't read as functional; the Problems vs
+            Solutions card columns above already carry the contrast story. */}
         <div className="mb-12">
-          <div className="flex items-center justify-center space-x-4 mb-8">
-            <button
-              type="button"
-              onClick={() => selectView('problem')}
-              aria-pressed={activeView === 'problem'}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
-                activeView === 'problem'
-                  ? 'bg-red-500/20 text-red-300 border-2 border-red-500/50'
-                  : 'bg-slate-800/30 text-slate-500 border-2 border-slate-700/30 hover:border-slate-600/50'
-              }`}
-            >
-              Before: Disconnected
-            </button>
-
-            <div className="flex items-center space-x-2 text-slate-500" aria-hidden>
-              <ArrowRight className="w-5 h-5" />
-            </div>
-
-            <button
-              type="button"
-              onClick={() => selectView('solution')}
-              aria-pressed={activeView === 'solution'}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ease-out ${
-                activeView === 'solution'
-                  ? 'bg-blue-500/20 text-blue-300 border-2 border-blue-500/50'
-                  : 'bg-slate-800/30 text-slate-500 border-2 border-slate-700/30 hover:border-slate-600/50'
-              }`}
-            >
-              After: IIoTEdge
-            </button>
+          <div className="mb-8 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-cyan-300">
+              <Check className="w-3.5 h-3.5" />
+              Unified Network Architecture
+            </span>
           </div>
 
-          <NetworkVisualization mode={activeView} isVisible={isVisible} />
+          <NetworkVisualization mode="solution" isVisible={isVisible} />
         </div>
 
         {/* Transition Statement */}

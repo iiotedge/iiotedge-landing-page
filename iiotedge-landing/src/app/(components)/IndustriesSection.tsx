@@ -41,15 +41,6 @@ interface DetailViewProps {
   industry: Industry;
 }
 
-interface ColorClasses {
-  bg: string;
-  border: string;
-  activeBorder: string;
-  text: string;
-  iconBg: string;
-  glow: string;
-}
-
 const IndustriesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndustry, setActiveIndustry] = useState(0);
@@ -77,15 +68,15 @@ const IndustriesSection = () => {
       id: 'manufacturing',
       icon: Factory,
       title: 'Smart Manufacturing',
-      tagline: 'Industry 4.0 Ready',
+      tagline: 'Industry 4.0 + OEE',
       color: 'blue',
-      description: 'Transform your factory floor with real-time monitoring, predictive maintenance, and AI-powered quality control.',
+      description: 'Real-time OEE tracking, predictive maintenance and AI-powered quality control wired into your plant floor without ripping out existing PLCs.',
       useCases: [
         'Production line optimization',
+        'OEE tracking & visualization',
+        'Predictive maintenance (AI / LLM)',
         'Quality control automation',
-        'Predictive maintenance',
         'Energy management',
-        'OEE tracking'
       ],
       metrics: [
         { label: 'Uptime Increase', value: '23%', icon: TrendingUp },
@@ -99,23 +90,23 @@ const IndustriesSection = () => {
     {
       id: 'energy',
       icon: Zap,
-      title: 'Energy & Utilities',
-      tagline: 'Smart Grid Management',
+      title: 'Energy & Renewables',
+      tagline: 'MNRE-compliant DER architecture',
       color: 'yellow',
-      description: 'Optimize energy distribution, integrate renewables, and monitor critical infrastructure in real-time.',
+      description: 'Production-grade ingestion and control rule chains for Distributed Energy Resources — solar, inverters, smart meters and grid assets — with cryptographic device identity and bi-directional MQTT ACKs.',
       useCases: [
-        'Smart grid management',
-        'Renewable integration',
-        'Asset monitoring',
-        'Load balancing',
-        'Outage prediction'
+        'MNRE-compliant DER ingestion',
+        'Zero-Touch device onboarding',
+        'Inverter & smart-meter routing',
+        'Load balancing & grid orchestration',
+        'Outage prediction',
       ],
       metrics: [
         { label: 'Grid Efficiency', value: '+18%', icon: Activity },
         { label: 'Downtime Reduced', value: '67%', icon: Clock },
         { label: 'Energy Saved', value: '340 MWh', icon: Zap }
       ],
-      technologies: ['Modbus', 'DNP3', '5G', 'Predictive Analytics'],
+      technologies: ['Modbus', 'DNP3', 'MQTT + ACK', 'Redis OTP'],
       image: 'Solar farm',
       imageSrc: '/images/industries/energy.webp'
     },
@@ -215,103 +206,66 @@ const IndustriesSection = () => {
 
   const IndustryCard = ({ industry, index, isActive, isVisible, onHover }: IndustryCardProps) => {
     const Icon = industry.icon;
-    const colorClasses: Record<string, ColorClasses> = {
-      blue: { 
-        bg: 'from-blue-500/10 to-blue-600/5', 
-        border: 'border-blue-500/30', 
-        activeBorder: 'border-blue-500',
-        text: 'text-blue-400',
-        iconBg: 'bg-blue-500/10',
-        glow: 'shadow-blue-500/50'
-      },
-      yellow: { 
-        bg: 'from-yellow-500/10 to-yellow-600/5', 
-        border: 'border-yellow-500/30', 
-        activeBorder: 'border-yellow-500',
-        text: 'text-yellow-400',
-        iconBg: 'bg-yellow-500/10',
-        glow: 'shadow-yellow-500/50'
-      },
-      green: { 
-        bg: 'from-green-500/10 to-green-600/5', 
-        border: 'border-green-500/30', 
-        activeBorder: 'border-green-500',
-        text: 'text-green-400',
-        iconBg: 'bg-green-500/10',
-        glow: 'shadow-green-500/50'
-      },
-      purple: { 
-        bg: 'from-purple-500/10 to-purple-600/5', 
-        border: 'border-purple-500/30', 
-        activeBorder: 'border-purple-500',
-        text: 'text-purple-400',
-        iconBg: 'bg-purple-500/10',
-        glow: 'shadow-purple-500/50'
-      },
-      orange: { 
-        bg: 'from-orange-500/10 to-orange-600/5', 
-        border: 'border-orange-500/30', 
-        activeBorder: 'border-orange-500',
-        text: 'text-orange-400',
-        iconBg: 'bg-orange-500/10',
-        glow: 'shadow-orange-500/50'
-      },
-      cyan: { 
-        bg: 'from-cyan-500/10 to-cyan-600/5', 
-        border: 'border-cyan-500/30', 
-        activeBorder: 'border-cyan-500',
-        text: 'text-cyan-400',
-        iconBg: 'bg-cyan-500/10',
-        glow: 'shadow-cyan-500/50'
-      }
+    // Icon-only color identity. Card chrome (border/bg) is unified slate so
+    // six different-colored cards don't read as visual noise. Only the
+    // selected card picks up the brand cyan accent + scale.
+    const iconColorMap: Record<string, { text: string; bg: string; ring: string }> = {
+      blue:   { text: 'text-blue-400',   bg: 'bg-blue-500/10',   ring: 'ring-blue-500/30' },
+      yellow: { text: 'text-yellow-400', bg: 'bg-yellow-500/10', ring: 'ring-yellow-500/30' },
+      green:  { text: 'text-green-400',  bg: 'bg-green-500/10',  ring: 'ring-green-500/30' },
+      purple: { text: 'text-purple-400', bg: 'bg-purple-500/10', ring: 'ring-purple-500/30' },
+      orange: { text: 'text-orange-400', bg: 'bg-orange-500/10', ring: 'ring-orange-500/30' },
+      cyan:   { text: 'text-cyan-300',   bg: 'bg-cyan-500/10',   ring: 'ring-cyan-500/30' },
     };
-
-    const colors = colorClasses[industry.color];
+    const iconColors = iconColorMap[industry.color];
 
     return (
       <div
         onMouseEnter={() => onHover(index)}
-        className={`group relative cursor-pointer transition-all duration-500 ease-out ${
-          isActive ? 'scale-105' : ''
+        onFocus={() => onHover(index)}
+        tabIndex={0}
+        role="button"
+        aria-pressed={isActive}
+        className={`group relative cursor-pointer transition-all duration-500 ease-out focus:outline-none ${
+          isActive ? 'scale-[1.03]' : ''
         }`}
         style={{
-          animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none'
+          animation: isVisible ? `fadeInUp 0.6s ease-out ${0.2 + index * 0.1}s both` : 'none',
         }}
       >
-        <div className={`relative h-full p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-300 ease-out ${
-          isActive 
-            ? `bg-gradient-to-br ${colors.bg} ${colors.activeBorder} shadow-xl ${colors.glow}` 
-            : `bg-slate-900/30 ${colors.border} hover:${colors.activeBorder}`
-        }`}>
-          {/* Icon */}
-          <div className={`inline-flex p-4 rounded-xl mb-4 ${colors.iconBg} ${
-            isActive ? 'ring-2 ' + colors.activeBorder : ''
-          } transition-all duration-300 ease-out`}>
-            <Icon className={`w-8 h-8 ${colors.text}`} />
+        <div
+          className={`relative h-full rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 ease-out ${
+            isActive
+              ? 'border-cyan-400/60 bg-slate-900/60 shadow-xl shadow-cyan-500/15'
+              : 'border-slate-800 bg-slate-900/30 hover:border-slate-700'
+          }`}
+        >
+          {/* Icon — only place per-industry color survives at the card level */}
+          <div
+            className={`mb-4 inline-flex rounded-xl p-4 ${iconColors.bg} ${
+              isActive ? `ring-2 ${iconColors.ring}` : ''
+            } transition-all duration-300 ease-out`}
+          >
+            <Icon className={`w-8 h-8 ${iconColors.text}`} />
           </div>
 
           {/* Content */}
-          <h3 className="text-xl font-bold text-white mb-2">{industry.title}</h3>
-          <p className={`text-sm mb-4 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
-            {industry.tagline}
-          </p>
+          <h3 className="mb-2 text-xl font-bold text-white">{industry.title}</h3>
+          <p className="mb-4 text-sm font-medium text-slate-400">{industry.tagline}</p>
+          <p className="text-sm leading-relaxed text-slate-400">{industry.description}</p>
 
-          <p className={`text-sm leading-relaxed transition-colors duration-300 ease-out ${
-            isActive ? 'text-slate-300' : 'text-slate-600'
-          }`}>
-            {industry.description}
-          </p>
-
-          {/* Arrow indicator */}
-          <div className={`absolute bottom-6 right-6 transition-all duration-300 ease-out ${
-            isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
-          }`}>
-            <ArrowRight className={`w-5 h-5 ${colors.text}`} />
+          {/* Arrow indicator — appears only on active card */}
+          <div
+            className={`absolute bottom-6 right-6 transition-all duration-300 ease-out ${
+              isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
+            }`}
+          >
+            <ArrowRight className="h-5 w-5 text-cyan-300" />
           </div>
 
-          {/* Active indicator */}
+          {/* Selected-state accent bar at bottom */}
           {isActive && (
-            <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${colors.bg} rounded-b-2xl`} />
+            <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r from-cyan-500/0 via-cyan-400/60 to-cyan-500/0" />
           )}
         </div>
       </div>
@@ -493,29 +447,38 @@ const IndustriesSection = () => {
           <DetailView industry={industries[activeIndustry]} />
         </div>
 
-        {/* Stats Bar */}
-        <div 
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+        {/* Stats band — promoted to a full-width strip with oversized
+            numerals so the fleet metrics actually read as scale signals. */}
+        <div
+          className="relative mb-12 overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900/80 via-slate-950 to-slate-900/80"
           style={{ animation: isVisible ? 'fadeInUp 0.6s ease-out 1.2s both' : 'none' }}
         >
-          {[
-            { label: 'Industries Served', value: '6+', icon: Factory },
-            { label: 'Active Deployments', value: '50+', icon: CheckCircle },
-            { label: 'Countries', value: '12+', icon: Building2 },
-            { label: 'Uptime SLA', value: '99.95%', icon: Shield }
-          ].map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <div 
-                key={i}
-                className="bg-slate-900/30 border border-slate-800 rounded-xl p-6 text-center"
-              >
-                <Icon className="w-6 h-6 text-blue-400 mx-auto mb-3" />
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 50% 0%, rgba(34,211,238,0.18), transparent 60%)',
+            }}
+          />
+          <div className="relative grid grid-cols-2 divide-slate-800 lg:grid-cols-4 lg:divide-x">
+            {[
+              { label: 'Industries Served', value: '6+', icon: Factory },
+              { label: 'Active Deployments', value: '50+', icon: CheckCircle },
+              { label: 'Countries', value: '12+', icon: Building2 },
+              { label: 'Uptime SLA', value: '99.95%', icon: Shield },
+            ].map(({ label, value, icon: Icon }) => (
+              <div key={label} className="flex flex-col items-center gap-2 px-6 py-10 text-center">
+                <Icon className="h-5 w-5 text-cyan-300" />
+                <div className="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                  {value}
+                </div>
+                <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  {label}
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         {/* CTA */}

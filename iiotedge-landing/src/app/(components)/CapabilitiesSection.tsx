@@ -14,16 +14,16 @@ import {
 
 const hardwareBullets = [
   "Arm, x86 and RISC-V gateways with modular I/O and on-device GPU",
+  "Zero-Touch Provisioning with cache-aside Redis OTP authentication",
+  "Bi-directional MQTT closed loop with strict ACK confirmation",
   "IP67-rated enclosures certified for plant, mining and energy sites",
-  "Reference kits with sensors, starter workloads and field cabling",
-  "Hot-swappable cellular, LoRa, Ethernet, RS-485 and 4G/5G modules",
 ];
 
 const platformBullets = [
-  "GitOps configuration management with one-click rollbacks",
-  "Fleet-wide observability for workloads, health and compliance",
+  "Reporting Engine — device-profile selection, metric mapping, scheduled exports",
+  "Decoupled async event streams between configuration layer and processing service",
   "Edge model registry with drift detection and automated retraining",
-  "Closed-loop feedback on confidence, anomalies and inference latency",
+  "AI / LLM predictive maintenance insights (in delivery)",
 ];
 
 const capabilities = [
@@ -174,13 +174,13 @@ export default function CapabilitiesSection() {
               <div className="absolute inset-0 bg-gradient-to-tl from-slate-950/80 via-slate-950/20 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-2">
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
-                  342+ fleet nodes
+                  GitOps rollouts
                 </span>
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
                   &lt;50ms refresh
                 </span>
                 <span className="rounded-full border border-cyan-400/30 bg-slate-950/70 px-3 py-1 font-mono text-[11px] text-cyan-300 backdrop-blur">
-                  GitOps
+                  Drift detection
                 </span>
               </div>
             </div>

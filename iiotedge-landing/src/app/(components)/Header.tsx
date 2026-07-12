@@ -10,6 +10,7 @@ export default function Header() {
   const navLinks = [
     { href: "#platform", label: "Platform" },
     { href: "#demo", label: "Live Demo" },
+    { href: "#reports", label: "Reports" },
     { href: "#industries", label: "Industries" },
     { href: "#capabilities", label: "Capabilities" },
     { href: "#contact", label: "Contact" },

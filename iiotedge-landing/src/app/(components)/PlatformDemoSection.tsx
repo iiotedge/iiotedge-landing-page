@@ -680,17 +680,29 @@ const PlatformDemoSection = () => {
 
         <div className="text-center">
           <p className="text-slate-400 mb-6">
-            Experience the full platform with a personalized demo
+            Walk through the live console with sample telemetry, rule chains and reports.
           </p>
-          <a
-            href="#contact"
-            className="group inline-flex px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
-          >
-            <span className="flex items-center justify-center space-x-2">
-              <span>Request Live Demo</span>
-              <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
-            </span>
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://demo.iiotedge.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
+              data-event="cta_click"
+              data-payload='{"location":"demo_section_launch"}'
+            >
+              <span className="flex items-center justify-center space-x-2">
+                <span>Open Live Demo</span>
+                <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
+              </span>
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex px-8 py-4 bg-slate-800/50 border border-slate-700 text-white rounded-lg font-semibold hover:border-blue-500/50 transition-all duration-300 ease-out hover:scale-105"
+            >
+              Talk to an engineer
+            </a>
+          </div>
         </div>
       </div>
     </section>
